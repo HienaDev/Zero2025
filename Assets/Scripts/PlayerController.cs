@@ -14,20 +14,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.2f;
     private float justGroundedTime;
     private bool grounded = false;
+    private bool jumped = false;
 
     private GameObject sprite;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer cannonSprite;
 
     [SerializeField] private float fallGravityMultiplier = 2.5f;
     private float originalGravityScale;
-    
+
+    [SerializeField] private Animator animator;
+
     public void SetGrounded(bool isGrounded)
     {
         if (!isGrounded && grounded)
         {
+            jumped = false;
             justGroundedTime = Time.time;
         }
-        if(isGrounded)
+        if (isGrounded)
         {
             jumpCount = 0;
         }
@@ -61,13 +66,27 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount++;
             justJumpedTime = Time.time;
+            jumped = true;
             grounded = false;
         }
 
-        if(Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp("Jump"))
         {
             justJumpedTime = -jumpHoldTime;
         }
+
+        if (jumped)
+        {
+            animator.SetFloat("SpeedY", velocity.y);
+        }
+        else
+        {
+            animator.SetFloat("SpeedY", 0);
+        }
+
+        //if (jumped && velocity.y < 0) jumped = false;
+
+        animator.SetBool("Jumped", jumped); 
 
         if (Input.GetButton("Jump") && Time.time < justJumpedTime + jumpHoldTime)
         {
@@ -86,7 +105,17 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
+        if (grounded)
+            animator.SetFloat("SpeedX", Mathf.Abs(velocity.x));
+        else
+            animator.SetFloat("SpeedX", 0);
+
         UpdateSprite();
+    }
+
+    public void ApplyExternalForce(Vector2 externalForce)
+    {
+        rb.AddForce(externalForce, ForceMode2D.Impulse);
     }
 
     void UpdateSprite()
@@ -96,10 +125,14 @@ public class PlayerController : MonoBehaviour
         if (mousePosition.x < transform.position.x)
         {
             spriteRenderer.flipX = true;
+            //cannonSprite.flipY = true;
+            //cannonSprite.transform.eulerAngles = new Vector3(0, 180, cannonSprite.transform.eulerAngles.z);
         }
         else
         {
             spriteRenderer.flipX = false;
+            //cannonSprite.flipY = false;
+            //cannonSprite.transform.eulerAngles = new Vector3(0, 0, cannonSprite.transform.eulerAngles.z);
         }
     }
 }

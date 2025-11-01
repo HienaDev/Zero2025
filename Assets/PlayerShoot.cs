@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
 
     private PlayerStats playerStats;
+    private PlayerController playerController;
 
     [SerializeField] private Projectile projectilePrefab;
 
@@ -19,7 +20,8 @@ public class PlayerShoot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerStats = GetComponent<PlayerStats>();  
+        playerStats = GetComponent<PlayerStats>();
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -47,22 +49,27 @@ public class PlayerShoot : MonoBehaviour
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Instantiate the projectile at the player's position
-        Projectile projectile = Instantiate(projectilePrefab, firePoint.transform.position, Quaternion.identity);
+        playerController.ApplyExternalForce(-cannonSprite.transform.right * playerStats.SelfKnockbackForce);
 
-        projectile.gameObject.transform.eulerAngles = new Vector3(0, 0,
-            Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg);
-
-        projectile.Initialize(playerStats.ProjectileSpeed, playerStats.Damage);
-
-        // Apply effects to the projectile
-        foreach (ProjectileEffect effect in playerStats.ProjectileEffects)
+        for (int i = 0; i < playerStats.NumberOfProjectiles; i++)
         {
-            var tempEffect = projectile.gameObject.AddComponent(effect.GetType());
-            projectile.AddEffect(tempEffect as ProjectileEffect);
 
-            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(effect), tempEffect);
+            // Instantiate the projectile at the player's position
+            Projectile projectile = Instantiate(projectilePrefab, firePoint.transform.position, Quaternion.identity);
+
+            projectile.gameObject.transform.eulerAngles = new Vector3(0, 0,
+                Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg + (i - (playerStats.NumberOfProjectiles - 1) / 2) * playerStats.SpreadAngle);
+
+            projectile.Initialize(playerStats.ProjectileSpeed, playerStats.Damage, playerStats.PierceCount);
+
+            // Apply effects to the projectile
+            foreach (ProjectileEffect effect in playerStats.ProjectileEffects)
+            {
+                var tempEffect = projectile.gameObject.AddComponent(effect.GetType());
+                projectile.AddEffect(tempEffect as ProjectileEffect);
+
+                JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(effect), tempEffect);
+            }
         }
-
     }
 }

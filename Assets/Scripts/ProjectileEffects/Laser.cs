@@ -14,6 +14,12 @@ public class Laser : ProjectileEffect
 
     public override void CallEffect(Enemy Enemy)
     {
+
+        bool shouldApplyEffect = Random.value <= effectChance;
+
+        if (!shouldApplyEffect)
+            return;
+
         LaserDamage laser = Instantiate(laserHorizontalPrefab, Enemy.transform.position, Quaternion.identity);
 
         laser.Initialize(projectile.Damage * damageMultiplier);

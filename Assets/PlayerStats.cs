@@ -64,6 +64,27 @@ public class PlayerStats : MonoBehaviour
     {
         shootRate = Mathf.Max(0.1f, shootRate - value);
     }
+    public void MultiplyBaseShootRate(float value)
+    {
+        shootRate *= value;
+    }
+
+    // Number of Projectiles
+    [SerializeField] private int numberOfProjectiles = 1;
+    private List<int> numberOfProjectilesModifiers = new List<int>();
+    public int NumberOfProjectiles => numberOfProjectiles + numberOfProjectilesModifiers.Sum();
+    public void AddNumberOfProjectilesModifier(int modifier) => numberOfProjectilesModifiers.Add(modifier);
+    [SerializeField] private float spreadAngle = 15f;
+    public float SpreadAngle => spreadAngle;
+
+    // Self knockback
+    [SerializeField] private float selfKnockbackForce = 0f;
+    public float SelfKnockbackForce => selfKnockbackForce;
+    public void IncreaseBaseSelfKnockbackForce(float value)
+    {
+        selfKnockbackForce += value;
+    }
+
 
     // Pierce Count
     [SerializeField] private int pierceCount = 0;

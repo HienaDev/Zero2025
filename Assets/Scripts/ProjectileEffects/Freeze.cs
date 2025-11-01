@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Freeze : ProjectileEffect
 {
+    [SerializeField] private float effectChanceOverride = 0.2f;
+    [SerializeField] private float freezeDuration = 2.0f;
+
+
     private void Start()
     {
-        effectChance = 0.2f; // 30% chance to trigger on hit
+        effectChance = effectChanceOverride; // 30% chance to trigger on hit
     }
 
     public override void CallEffect(Enemy Enemy)
@@ -15,7 +19,7 @@ public class Freeze : ProjectileEffect
             return;
 
         //Debug.Log("Freeze proc!");
-        Enemy.ApplyStatusEffect(Status.Frozen, 2.0f); 
+        Enemy.ApplyStatusEffect(Status.Frozen, freezeDuration); 
     }
 
     public override void LevelUp()

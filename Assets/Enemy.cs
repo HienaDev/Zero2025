@@ -1,10 +1,10 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-
-    
 
     [SerializeField] private float health = 100f;
     private SpriteRenderer spriteRenderer;
@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private float originalSpeed;
 
     private Tween iceTween;
+
+    public List<Status> currentStatusEffects = new List<Status>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,7 +59,7 @@ public class Enemy : MonoBehaviour
         {
             case Status.Frozen:
                 // Apply frozen effect
-                ApplyFrozenEffect(duration);
+                StartCoroutine(ApplyFrozenEffect(duration));
                 break;
             case Status.Poison:
                 // Apply poison effect
@@ -68,17 +70,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void ApplyFrozenEffect(float duration)
+    private IEnumerator ApplyFrozenEffect(float duration)
     {
         // Example: Reduce speed to 0
         // Assuming there's a movement component to modify
 
+
+        yield return new WaitForEndOfFrame(); // Wait a frame to ensure we dont shoot icycles in the same frame we freeze an enemy
+
         iceTween?.Kill();
+
+        
 
         SpriteRenderer ice = gameObject.GetComponentInChildren<TAG_Ice>().GetComponent<SpriteRenderer>();
 
         speed = 0f;
         ice.color = Color.white;
+        currentStatusEffects.Add(Status.Frozen);
 
         // Use tween instead to scale the ice very fast in 0.1 seconds and then reduce the transparency over the duration
         ice.transform.localScale = Vector3.zero;
@@ -88,6 +96,7 @@ public class Enemy : MonoBehaviour
         {
             speed = originalSpeed;
             ice.color = Color.clear;
+            currentStatusEffects.Remove(Status.Frozen);
         });
     }
 

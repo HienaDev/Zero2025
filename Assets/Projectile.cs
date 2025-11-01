@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class Projectile : MonoBehaviour
     private int pierceCount = 0;
     private List<int> pierceModifiers = new List<int>();
 
-    private List<ProjectileEffect> effects = new List<ProjectileEffect>();
+    [SerializeField] private List<ProjectileEffect> effects = new List<ProjectileEffect>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    IEnumerator Start()
     {
-        
+        yield return new WaitForSeconds(10f);
+
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

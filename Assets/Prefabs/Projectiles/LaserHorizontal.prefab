@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8904306661202226759}
   - component: {fileID: 8330272587601144930}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: LaserHorizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 12, z: 1}
+  m_LocalScale: {x: 45, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

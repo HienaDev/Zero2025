@@ -1,14 +1,17 @@
-using System.Drawing;
 using UnityEngine;
+using DG.Tweening;
 
 public class LaserDamage : MonoBehaviour
 {
     private float damage = 20f;
+    private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private bool horizontal = true;
 
     public void Initialize(float damage)
     {
         this.damage = damage;
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         ApplyDamage();  
     }
@@ -29,6 +32,16 @@ public class LaserDamage : MonoBehaviour
                 }
             }
         }
+
+        // Laser sprite goes from original color to white and then fades out
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(spriteRenderer.DOColor(Color.white, 0.2f).SetEase(Ease.InQuart));
+        sequence.Append(spriteRenderer.DOFade(0f, 0.2f).SetEase(Ease.InQuart));
+        if (!horizontal)
+            sequence.Join(transform.DOScaleX(0f, 0.2f).SetEase(Ease.InQuart));
+        else
+            sequence.Join(transform.DOScaleY(0f, 0.2f).SetEase(Ease.InQuart));
+        sequence.OnComplete(() => Destroy(gameObject));
 
     }
 }

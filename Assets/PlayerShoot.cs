@@ -5,24 +5,21 @@ using System.Collections.Generic;
 public class PlayerShoot : MonoBehaviour
 {
 
-    [SerializeField] private Projectile projectilePrefab;
+    private PlayerStats playerStats;
 
-    [SerializeField] private List<ProjectileEffect> projectileEffects;
+    [SerializeField] private Projectile projectilePrefab;
 
     [SerializeField] private GameObject cannonSprite;
     [SerializeField] private GameObject firePoint;
 
-    [Header("Stats")]
-    [SerializeField] private float damage = 20f;
-    [SerializeField] private float shootRate = 0.5f;
     private float justShot;
-    [SerializeField] private float projectileSpeed = 10f;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerStats = GetComponent<PlayerStats>();  
     }
 
     // Update is called once per frame
@@ -31,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
 
         Aim();
 
-        if (Input.GetButton("Fire1") && justShot + shootRate < Time.time)
+        if (Input.GetButton("Fire1") && justShot + playerStats.ShootRate < Time.time)
         {
             Shoot();
             justShot = Time.time;
@@ -56,10 +53,10 @@ public class PlayerShoot : MonoBehaviour
         projectile.gameObject.transform.eulerAngles = new Vector3(0, 0,
             Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg);
 
-        projectile.Initialize(projectileSpeed, damage);
+        projectile.Initialize(playerStats.ProjectileSpeed, playerStats.Damage);
 
         // Apply effects to the projectile
-        foreach (ProjectileEffect effect in projectileEffects)
+        foreach (ProjectileEffect effect in playerStats.ProjectileEffects)
         {
             var tempEffect = projectile.gameObject.AddComponent(effect.GetType());
             projectile.AddEffect(tempEffect as ProjectileEffect);

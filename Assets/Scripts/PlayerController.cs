@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerStats playerStats;
 
-    [SerializeField] private float maxSpeed = 5f;
-    [SerializeField] private float acceleration = 10f;
-    [SerializeField] private float jumpForce = 5f;
 
     [SerializeField] private float jumpHoldTime = 0.1f;
+    private int jumpCount = 0;
     private float justJumpedTime;
 
     private Rigidbody2D rb;
@@ -28,13 +27,17 @@ public class PlayerController : MonoBehaviour
         {
             justGroundedTime = Time.time;
         }
+        if(isGrounded)
+        {
+            jumpCount = 0;
+        }
         grounded = isGrounded;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        playerStats = GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody2D>();
 
         originalGravityScale = rb.gravityScale;
@@ -51,11 +54,12 @@ public class PlayerController : MonoBehaviour
         // Handle horizontal movement
         float inputX = Input.GetAxis("Horizontal");
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputX * maxSpeed, acceleration * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, inputX * playerStats.MaxSpeed, playerStats.Acceleration * Time.deltaTime);
 
         // Handle jumping
-        if (Input.GetButtonDown("Jump") && (grounded || justGroundedTime + coyoteTime > Time.time))
+        if (Input.GetButtonDown("Jump") && ((grounded || justGroundedTime + coyoteTime > Time.time) || playerStats.JumpNumber > jumpCount))
         {
+            jumpCount++;
             justJumpedTime = Time.time;
             grounded = false;
         }
@@ -67,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Jump") && Time.time < justJumpedTime + jumpHoldTime)
         {
-            velocity.y = jumpForce;
+            velocity.y = playerStats.JumpForce;
         }
 
         // Handle fall gravity

@@ -7,7 +7,7 @@ public class ChainLightning : ProjectileEffect
 
     [SerializeField] private ChainProjectile lightningPrefab;
 
-    private float damageMultiplier = 0.5f; // Percentage of projectile damage
+    private float damageMultiplier = 1f; // Percentage of projectile damage
 
     [SerializeField] private float ligthtningRange = 5f;
     [SerializeField] private int numberOfEenemies = 3;

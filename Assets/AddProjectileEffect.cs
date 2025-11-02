@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AddProjectileEffect : MonoBehaviour
 {
@@ -8,9 +9,18 @@ public class AddProjectileEffect : MonoBehaviour
 
     private PlayerStats playerStats;
 
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Image iconUI;
+   
+
     private void Start()
     {
         playerStats = FindAnyObjectByType<PlayerStats>();
+
+        if (iconUI != null && icon != null)
+        {
+            iconUI.sprite = icon;
+        }
     }
 
     public void AddEffect()

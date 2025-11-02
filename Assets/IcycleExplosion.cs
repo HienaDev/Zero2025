@@ -18,6 +18,8 @@ public class IcycleExplosion : ProjectileEffect
         if (Enemy.currentStatusEffects.Contains(Status.Frozen) == false)
             return;
 
+        Enemy.KillEnemy(); // Instantly kill the enemy if frozen
+
         float initialOffset = Random.Range(0f, 360f); // Randomize starting angle for variety
 
         //Debug.Log("Icycle Explosion proc!");

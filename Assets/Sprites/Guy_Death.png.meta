@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,10 +118,10 @@ TextureImporter:
       name: Guy_Death_0
       rect:
         serializedVersion: 2
-        x: 733
-        y: 2371
-        width: 739
-        height: 1097
+        x: 0
+        y: 2000
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Guy_Death_1
       rect:
         serializedVersion: 2
-        x: 2730
-        y: 2368
-        width: 771
-        height: 1149
+        x: 2000
+        y: 2000
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Guy_Death_2
       rect:
         serializedVersion: 2
-        x: 4728
-        y: 2373
-        width: 851
-        height: 1089
+        x: 4000
+        y: 2000
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Guy_Death_3
       rect:
         serializedVersion: 2
-        x: 622
-        y: 372
-        width: 971
-        height: 684
+        x: 0
+        y: 0
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Guy_Death_4
       rect:
         serializedVersion: 2
-        x: 2568
-        y: 322
-        width: 1005
-        height: 277
+        x: 2000
+        y: 0
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Guy_Death_5
       rect:
         serializedVersion: 2
-        x: 4517
-        y: 311
-        width: 1105
-        height: 264
+        x: 4000
+        y: 0
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 76805b6a99882c54982b13118b3ec78a
     internalID: 0
     vertices: []
     indices: 

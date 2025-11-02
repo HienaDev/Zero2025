@@ -2,9 +2,13 @@ using TMPro;
 using UnityEngine;
 using NaughtyAttributes;
 using System;
+using UnityEngine.UI;   
 
 public class AddBaseStatModifier : MonoBehaviour
 {
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Image iconUI;
+
     public enum StatType
     {
         MaxSpeed,
@@ -16,6 +20,9 @@ public class AddBaseStatModifier : MonoBehaviour
         ProjectilePierce,
         ProjectileCount,
         SelfKnockbackForce,
+        Heal,
+        BaseDamage,
+        DecreaseBaseShootRate,
     }
 
     [Serializable]
@@ -80,6 +87,9 @@ public class AddBaseStatModifier : MonoBehaviour
                 case StatType.SelfKnockbackForce:
                     statText.text = "Self Knockback increase: " + (modifierValue * 100).ToString("F0") + "%";
                     break;
+                case StatType.Heal:
+                    statText.text = "Heal 1 Heart";
+                    break;
             }
 
     }
@@ -116,7 +126,9 @@ public class AddBaseStatModifier : MonoBehaviour
                 case StatType.SelfKnockbackForce:
                     playerStats.IncreaseBaseSelfKnockbackForce(modifierValue);
                     break;
-
+                case StatType.Heal:
+                    playerStats.Heal(1);
+                    break;
             }
         else
         {
@@ -133,11 +145,17 @@ public class AddBaseStatModifier : MonoBehaviour
                     case StatType.Damage:
                         playerStats.AddDamageModifier(statModifier.modifierValue);
                         break;
+                    case StatType.BaseDamage:
+                        playerStats.IncreaseBaseDamage(statModifier.modifierValue);
+                        break;
                     case StatType.ProjectileSpeed:
                         playerStats.AddProjectileSpeedModifier(statModifier.modifierValue);
                         break;
                     case StatType.ShootRate:
                         playerStats.AddShootRateModifier(statModifier.modifierValue);
+                        break;
+                    case StatType.DecreaseBaseShootRate:
+                        playerStats.DecreaseBaseShootRate(statModifier.modifierValue);
                         break;
                     case StatType.ShootRateBaseMultiply:
                         playerStats.MultiplyBaseShootRate(statModifier.modifierValue);

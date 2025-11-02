@@ -1,9 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerStats : MonoBehaviour
 {
+
+    [SerializeField] private Animator animator;
+    [SerializeField] private Collider2D col;
+    [SerializeField] private SpriteRenderer gunSprite;
+    [SerializeField] private GameObject guySoul;
+
     [Header("Player Stats")]
     // Player Health
     [SerializeField] private int maxHealth = 3;
@@ -18,10 +25,29 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player has died.");
+            animator.SetTrigger("Death");  
+            GetComponent<PlayerController>().enabled = false;
+            GetComponent<PlayerShoot>().enabled = false;
+            gunSprite.enabled = false;
+            DOVirtual.DelayedCall(1f, () =>
+            {
+                guySoul.SetActive(true);
+                Debug.Log("Target enabled!");
+            });
+            //col.enabled = false;
             // Implement player death logic here
         }
     }
+
+
+
     public bool IsAlive() => currentHealth > 0;
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        Debug.Log($"Player healed {amount}. Current health: {currentHealth}/{maxHealth}");
+    }
 
 
     // Player Speed
@@ -62,6 +88,7 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseBaseDamage(float value)
     {
         damage += value;
+        damage = Mathf.Max(5f, damage);
     }
 
     // Projectile Speed
@@ -81,7 +108,7 @@ public class PlayerStats : MonoBehaviour
     public void AddShootRateModifier(float modifier) => shootRateModifiers.Add(modifier);
     public void DecreaseBaseShootRate(float value)
     {
-        shootRate = Mathf.Max(0.1f, shootRate - value);
+        shootRate = Mathf.Max(0.05f, shootRate - value);
     }
     public void MultiplyBaseShootRate(float value)
     {

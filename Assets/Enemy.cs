@@ -15,10 +15,12 @@ public class Enemy : MonoBehaviour
     private float originalSpeed;
 
     private Tween iceTween;
+    private Tween poisonTween;
 
     public List<Status> currentStatusEffects = new List<Status>();
 
-    
+    [SerializeField] private GameObject deathEffectPrefab;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,6 +49,12 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            if(currentStatusEffects.Contains(Status.Frozen))
+            {
+                // If frozen, take extra damage or some special effect
+                // For simplicity, we just return here
+                return;
+            }
             // Optional: Add feedback for taking damage (e.g., flash red) using do tween
             sequence?.Kill();
 
@@ -112,23 +120,42 @@ public class Enemy : MonoBehaviour
 
     private System.Collections.IEnumerator ApplyPoisonEffect(float duration)
     {
+
+        poisonTween?.Kill();
+
+        SpriteRenderer poison = gameObject.GetComponentInChildren<Tag_Poison>().GetComponent<SpriteRenderer>();
+
+        currentStatusEffects.Add(Status.Poison);
+
+        poison.color = Color.white;
+
+        poison.transform.localScale = Vector3.zero;
+        poison.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack);
+
+        poisonTween = poison.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
+        {
+            poison.color = Color.clear;
+            currentStatusEffects.Remove(Status.Poison);
+        });
+
         float elapsed = 0f;
-        float damagePerSecond = 5f; // Example damage per second
-        spriteRenderer.color = Color.green;
+        float damagePerSecond = 10f; // Example damage per second
+
         while (elapsed < duration)
         {
             TakeDamage(damagePerSecond * Time.deltaTime);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        spriteRenderer.color = Color.white;
 
-        yield return 0.1f;
-        spriteRenderer.color = Color.white;
+
+
+
     }
 
     public void KillEnemy()
     {
+        Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

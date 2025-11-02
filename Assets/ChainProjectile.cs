@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ChainProjectile : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class ChainProjectile : MonoBehaviour
     private Tweener pathTween;
 
     [SerializeField] private ParticleSystem hitEffect;
+
+    IEnumerator Start()
+    {
+        yield return new WaitForSeconds(10f);
+
+        Destroy(gameObject);
+    }
+
     public void TravelThroughEnemies(List<Enemy> enemies, float speed, float damage)
     {
 

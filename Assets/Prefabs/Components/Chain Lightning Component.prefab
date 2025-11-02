@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningPrefab: {fileID: 2959821318691115571, guid: be946f7c2f2e3d5488299384fe580276, type: 3}
   ligthtningRange: 5
-  numberOfEenemies: 3
+  numberOfEenemies: 5
   speed: 50

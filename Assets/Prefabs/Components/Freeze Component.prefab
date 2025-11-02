@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5125f82ca1c24824991d0ac1ecf28d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectChanceOverride: 0.3
+  freezeDuration: 2

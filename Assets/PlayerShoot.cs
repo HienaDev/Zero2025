@@ -72,4 +72,24 @@ public class PlayerShoot : MonoBehaviour
             }
         }
     }
+
+    public void ClusterShot(Transform position, int clusterShotCount)
+    {
+        for (int i = 0; i < clusterShotCount; i++)
+        {
+            // Instantiate the projectile at the player's position
+            Projectile projectile = Instantiate(projectilePrefab, position.position, Quaternion.identity);
+            projectile.gameObject.transform.eulerAngles = new Vector3(0, 0,
+                (360f / clusterShotCount) * i);
+            projectile.Initialize(playerStats.ProjectileSpeed, playerStats.Damage, playerStats.PierceCount);
+            // Apply effects to the projectile
+            foreach (ProjectileEffect effect in playerStats.ProjectileEffects)
+            {
+                var tempEffect = projectile.gameObject.AddComponent(effect.GetType());
+                projectile.AddEffect(tempEffect as ProjectileEffect);
+                JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(effect), tempEffect);
+            }
+        }
+
+    }
 }

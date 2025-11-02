@@ -23,6 +23,8 @@ public class PlayerStats : MonoBehaviour
     [Header("UI Elements")]
 
     public Image image;
+    public GameObject text1;
+    public GameObject text2;
 
     [Header("Player Stats")]
     // Player Health
@@ -35,7 +37,7 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
         soulUI.transform.localScale = Vector3.one * currentHealth / maxHealth;
-        FindAnyObjectByType<CameraShake>().Shake(shakeDuration, shakeMagnitude);
+        
 
         Debug.Log($"Player took {damage} damage. Current health: {currentHealth}/{maxHealth}");
         if (currentHealth <= 0)
@@ -44,18 +46,24 @@ public class PlayerStats : MonoBehaviour
             animator.SetTrigger("Death");  
             GetComponent<PlayerController>().enabled = false;
             GetComponent<PlayerShoot>().enabled = false;
-            gunSprite.enabled = false;
+            gunSprite.gameObject.SetActive(false);
             DOVirtual.DelayedCall(1f, () =>
             {
                 guySoul.SetActive(true);
                 Debug.Log("Target enabled!");
                 deathScreen.SetActive(true);
+                text1.SetActive(true);
+                text2.SetActive(true);
                 image.DOFade(0.8f, 1f).SetEase(Ease.InOutCirc);
 
             });
             //col.enabled = false;
             // Implement player death logic here
             
+        }
+        else
+        {
+            FindAnyObjectByType<CameraShake>().Shake(shakeDuration, shakeMagnitude);
         }
     }
 

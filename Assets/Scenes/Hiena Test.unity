@@ -2447,7 +2447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &386951406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9010,7 +9010,7 @@ MonoBehaviour:
   - {fileID: 8441528247443312972, guid: ef3a087f28666454a8a07353cad98ec1, type: 3}
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
-  beltChancePerWave: 0.25
+  beltChancePerWave: 0.5
   beltSpeedRange: {x: 5, y: 15}
   relicDisplay:
   - {fileID: 1179903830}
@@ -10814,7 +10814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1088529996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11878,7 +11878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0.8}
+  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15098,6 +15098,8 @@ MonoBehaviour:
   shakeMagnitude: 1
   deathScreen: {fileID: 1080957650}
   image: {fileID: 1295989410}
+  text1: {fileID: 1088529995}
+  text2: {fileID: 386951405}
   maxHealth: 3
   maxSpeed: 10
   acceleration: 200

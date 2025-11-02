@@ -321,7 +321,7 @@ public class WaveManager : MonoBehaviour
             }
 
             // Wait before next spawn cycle, scaled by wave number
-            yield return new WaitForSeconds(timeBetweenSpawns - 0.1f * waveNumber);
+            yield return new WaitForSeconds(Mathf.Max(0.1f, timeBetweenSpawns - 0.1f * waveNumber));
         }
 
         // Done spawning all enemies for this wave
@@ -339,6 +339,9 @@ public class WaveManager : MonoBehaviour
 
         Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         Enemy newEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+        newEnemy.health *= (1.1f * currentWave);
+        newEnemy.speed *= (1.05f * currentWave);
+        newEnemy.originalSpeed *= (1.05f * currentWave);
         activeEnemies.Add(newEnemy);
     }
 }

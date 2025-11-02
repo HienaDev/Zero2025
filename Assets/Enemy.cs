@@ -7,13 +7,13 @@ using System.Collections;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] private float health = 100f;
+    [SerializeField] public float health = 100f;
     private SpriteRenderer spriteRenderer;
     private Sequence sequence;
 
-    [SerializeField] private float speed = 10f;
+    [SerializeField] public float speed = 10f;
     public float Speed => speed;
-    private float originalSpeed;
+    public float originalSpeed;
 
     private Tween iceTween;
     private Tween poisonTween;
@@ -129,7 +129,6 @@ public class Enemy : MonoBehaviour
 
     private System.Collections.IEnumerator ApplyPoisonEffect(float duration)
     {
-
         poisonTween?.Kill();
 
         SpriteRenderer poison = gameObject.GetComponentInChildren<Tag_Poison>().GetComponent<SpriteRenderer>();
@@ -138,10 +137,9 @@ public class Enemy : MonoBehaviour
 
         poison.color = Color.white;
 
-        Vector3 originalSCale = poison.transform.localScale;
-
+        Vector3 originalScale = poison.transform.localScale;
         poison.transform.localScale = Vector3.zero;
-        poison.transform.DOScale(originalSCale, 0.1f).SetEase(Ease.OutBack);
+        poison.transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutBack);
 
         poisonTween = poison.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
         {
@@ -154,15 +152,13 @@ public class Enemy : MonoBehaviour
 
         while (elapsed < duration)
         {
-            TakeDamage(damagePerSecond * Time.deltaTime);
-            elapsed += Time.deltaTime;
-            yield return null;
+            // Apply damage once per second
+            TakeDamage(damagePerSecond);
+            elapsed += 1f;
+            yield return new WaitForSeconds(1f);
         }
-
-
-
-
     }
+
 
     public void KillEnemy(float delay = -1f )
     {

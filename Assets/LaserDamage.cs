@@ -23,7 +23,7 @@ public class LaserDamage : MonoBehaviour
         Vector2 size = new Vector2(transform.localScale.x, transform.localScale.y);
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, size, 0);
 
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.5f, pitch: Random.Range(0.9f, 1.1f));
 
 
         foreach (var hit in hits)

@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: 7e1e419708579d24e955ec3f8d01655a
+guid: 2202bcb59ae0a3c418df334e47fd46d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9184412343640288376
-    second: Enemy_walk_0
+      213: -4922767654520239609
+    second: Guy_Death_0
+  - first:
+      213: 6279517033055484160
+    second: Guy_Death_1
+  - first:
+      213: -3290036551890651271
+    second: Guy_Death_2
+  - first:
+      213: 8169121333722011697
+    second: Guy_Death_3
+  - first:
+      213: 255350123571348943
+    second: Guy_Death_4
+  - first:
+      213: -7967001536487999096
+    second: Guy_Death_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1000
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_walk_0
+      name: Guy_Death_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2000
-        height: 2000
+        x: 733
+        y: 2371
+        width: 739
+        height: 1097
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,74 +130,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8839b9272a96a8080800000000000000
-      internalID: -9184412343640288376
+      spriteID: 70ac98076e0deabb0800000000000000
+      internalID: -4922767654520239609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_walk_1
+      name: Guy_Death_1
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 2000
-        height: 2000
+        x: 2730
+        y: 2368
+        width: 771
+        height: 1149
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0fba86b0b053eca4fabaeff36bb6c683
-      internalID: -808581338
+      spriteID: 0097944a873552750800000000000000
+      internalID: 6279517033055484160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_walk_2
+      name: Guy_Death_2
       rect:
         serializedVersion: 2
-        x: 4000
-        y: 0
-        width: 2000
-        height: 2000
+        x: 4728
+        y: 2373
+        width: 851
+        height: 1089
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: dbcb5665a2c4f88438577c9390513a9e
-      internalID: -1885107315
+      spriteID: 977b18aff217752d0800000000000000
+      internalID: -3290036551890651271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_walk_3
+      name: Guy_Death_3
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 0
-        width: 2000
-        height: 2000
+        x: 622
+        y: 372
+        width: 971
+        height: 684
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8df0c3161531f1e41a61372ad3484a79
-      internalID: -223751911
+      spriteID: 138d097329c8e5170800000000000000
+      internalID: 8169121333722011697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guy_Death_4
+      rect:
+        serializedVersion: 2
+        x: 2568
+        y: 322
+        width: 1005
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc582d0a59f2b8300800000000000000
+      internalID: 255350123571348943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guy_Death_5
+      rect:
+        serializedVersion: 2
+        x: 4517
+        y: 311
+        width: 1105
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88934a440568f6190800000000000000
+      internalID: -7967001536487999096
       vertices: []
       indices: 
       edges: []
@@ -191,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -201,10 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Enemy_walk_0: -9184412343640288376
-      Enemy_walk_1: -808581338
-      Enemy_walk_2: -1885107315
-      Enemy_walk_3: -223751911
+      Guy_Death_0: -4922767654520239609
+      Guy_Death_1: 6279517033055484160
+      Guy_Death_2: -3290036551890651271
+      Guy_Death_3: 8169121333722011697
+      Guy_Death_4: 255350123571348943
+      Guy_Death_5: -7967001536487999096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

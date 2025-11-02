@@ -4,6 +4,7 @@ public class AddProjectileEffect : MonoBehaviour
 {
 
     [SerializeField] private ProjectileEffect effectToAdd;
+    public ProjectileEffect EffectToAdd => effectToAdd;
 
     private PlayerStats playerStats;
 

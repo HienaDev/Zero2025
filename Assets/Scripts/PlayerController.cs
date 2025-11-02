@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    private float conveyorBeltSpeed = 0f;
+    public void SetConveyorBeltSpeed(float conveyorSpeed) => conveyorBeltSpeed = conveyorSpeed;
+
     public void SetGrounded(bool isGrounded)
     {
         if (!isGrounded && grounded)
@@ -59,7 +62,16 @@ public class PlayerController : MonoBehaviour
         // Handle horizontal movement
         float inputX = Input.GetAxis("Horizontal");
 
-        velocity.x = Mathf.MoveTowards(velocity.x, inputX * playerStats.MaxSpeed, playerStats.Acceleration * Time.deltaTime);
+        // Base target speed from input
+        float targetX = inputX * playerStats.MaxSpeed;
+
+        // Add conveyor effect if grounded
+        if (grounded)
+            targetX += conveyorBeltSpeed;
+
+        // Smoothly approach the target velocity
+        velocity.x = Mathf.MoveTowards(velocity.x, targetX, playerStats.Acceleration * Time.deltaTime);
+
 
         // Handle jumping
         if (Input.GetButtonDown("Jump") && ((grounded || justGroundedTime + coyoteTime > Time.time) || playerStats.JumpNumber > jumpCount))
@@ -103,10 +115,11 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = originalGravityScale;
         }
 
+     
         rb.linearVelocity = velocity;
 
         if (grounded)
-            animator.SetFloat("SpeedX", Mathf.Abs(velocity.x));
+            animator.SetFloat("SpeedX", Mathf.Abs(velocity.x) - Mathf.Abs(conveyorBeltSpeed));
         else
             animator.SetFloat("SpeedX", 0);
 

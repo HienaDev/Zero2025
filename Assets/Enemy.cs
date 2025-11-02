@@ -11,15 +11,20 @@ public class Enemy : MonoBehaviour
     private Sequence sequence;
 
     [SerializeField] private float speed = 10f;
+    public float Speed => speed;
     private float originalSpeed;
 
     private Tween iceTween;
 
     public List<Status> currentStatusEffects = new List<Status>();
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+
         originalSpeed = speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -30,13 +35,15 @@ public class Enemy : MonoBehaviour
         
     }
 
+
+
     public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
         {
             sequence?.Kill();
-            Destroy(gameObject);
+            KillEnemy();
         }
         else
         {
@@ -44,8 +51,11 @@ public class Enemy : MonoBehaviour
             sequence?.Kill();
 
             sequence = DOTween.Sequence();
+            sequence.AppendCallback(() => speed = 0f);
             sequence.Append(spriteRenderer.DOColor(Color.red, 0.05f).SetEase(Ease.OutQuart));
             sequence.Append(spriteRenderer.DOColor(Color.white, 0.05f).SetEase(Ease.InQuart));
+            sequence.AppendInterval(0.1f);
+            sequence.AppendCallback(() => speed = originalSpeed);
         }
     }
 
@@ -115,5 +125,10 @@ public class Enemy : MonoBehaviour
 
         yield return 0.1f;
         spriteRenderer.color = Color.white;
+    }
+
+    public void KillEnemy()
+    {
+        Destroy(gameObject);
     }
 }

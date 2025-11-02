@@ -5,6 +5,25 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Player Stats")]
+    // Player Health
+    [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(0, currentHealth);
+        Debug.Log($"Player took {damage} damage. Current health: {currentHealth}/{maxHealth}");
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player has died.");
+            // Implement player death logic here
+        }
+    }
+    public bool IsAlive() => currentHealth > 0;
+
+
     // Player Speed
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float acceleration = 10f;
@@ -104,5 +123,14 @@ public class PlayerStats : MonoBehaviour
         AddProjectileSpeedModifier(1.0f);
         AddShootRateModifier(1.0f);
         AddDamageModifier(1.0f);
+        currentHealth = maxHealth;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            damage *= 50f;
+        }
     }
 }

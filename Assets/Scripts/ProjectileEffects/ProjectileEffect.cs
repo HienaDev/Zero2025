@@ -7,6 +7,10 @@ public class ProjectileEffect : MonoBehaviour
 
     private int maxLevel = 3;
     private int currentLevel = 1;
+    public int CurrentLevel => currentLevel;
+
+    protected string EffectID = "0"; // unique name or type
+    public bool IsAtMaxLevel => currentLevel >= maxLevel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected void Awake()

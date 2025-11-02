@@ -5,9 +5,11 @@ public class IcycleExplosion : ProjectileEffect
     [SerializeField] private Projectile icyclePrefab;
     [SerializeField] private int numberOfIcycles = 3;
 
+    [SerializeField] private AudioClip[] sounds;
+
     private void Start()
     {
-        effectChance = 0.3f; // 30% chance to trigger on hit
+        effectChance = 0.5f; // 30% chance to trigger on hit
     }
 
     public override void CallEffect(Enemy Enemy)
@@ -18,7 +20,10 @@ public class IcycleExplosion : ProjectileEffect
         if (Enemy.currentStatusEffects.Contains(Status.Frozen) == false)
             return;
 
-        Enemy.KillEnemy(); // Instantly kill the enemy if frozen
+        Enemy.KillEnemy(0f); // Instantly kill the enemy if frozen
+
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.75f, pitch: Random.Range(0.9f, 1.1f));
+
 
         float initialOffset = Random.Range(0f, 360f); // Randomize starting angle for variety
 

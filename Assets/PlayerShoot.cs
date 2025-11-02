@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class PlayerShoot : MonoBehaviour
 
     private float justShot;
 
+    [SerializeField] private AudioClip[] shootSounds;
 
+    [SerializeField] private GameObject cannonBaby;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +31,16 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
 
-        Aim();
+        if(justShot + playerStats.ShootRate < Time.time)
+        {
+            cannonBaby.SetActive(true);
+        }
+        else
+        {
+            cannonBaby.SetActive(false);
+        }
+
+            Aim();
 
         if (Input.GetButton("Fire1") && justShot + playerStats.ShootRate < Time.time)
         {
@@ -50,6 +62,9 @@ public class PlayerShoot : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         playerController.ApplyExternalForce(-cannonSprite.transform.right * playerStats.SelfKnockbackForce);
+
+        AudioManager.Instance.Play(shootSounds[Random.Range(0, shootSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
+
 
         for (int i = 0; i < playerStats.NumberOfProjectiles; i++)
         {

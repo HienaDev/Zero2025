@@ -333,6 +333,7 @@ MonoBehaviour:
   speed: 2
   currentStatusEffects: 
   deathEffectPrefab: {fileID: 5787542957485260482, guid: 4d0d3327cf843624e85f4877af41b10a, type: 3}
+  destroyDelay: 0
 --- !u!114 &2196111795039843219
 MonoBehaviour:
   m_ObjectHideFlags: 0

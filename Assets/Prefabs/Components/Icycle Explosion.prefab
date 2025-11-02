@@ -46,3 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icyclePrefab: {fileID: 1989712269447075895, guid: d02c72f1805c73a4ca6c5ca270f1620d, type: 3}
   numberOfIcycles: 2
+  sounds:
+  - {fileID: 8300000, guid: e385cd40cff764349bdfd41622cfa694, type: 3}
+  - {fileID: 8300000, guid: e91aad24daf81a04d9aa21d77a9f5d79, type: 3}
+  - {fileID: 8300000, guid: b07574e4eefb6b942baa278c4afcc1da, type: 3}

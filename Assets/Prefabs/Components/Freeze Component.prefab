@@ -46,3 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectChanceOverride: 0.3
   freezeDuration: 2
+  sounds:
+  - {fileID: 8300000, guid: 43c56efcb48a9384dbf385e5c55ee36d, type: 3}
+  - {fileID: 8300000, guid: 173cc6de26df92840a1d3f76fd5d2aaf, type: 3}
+  - {fileID: 8300000, guid: 220477d267cff0d47b68974e35f7754c, type: 3}

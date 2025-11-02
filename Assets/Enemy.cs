@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject deathEffectPrefab;
 
+    [SerializeField] private float destroyDelay = 0.7f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
         {
             if(currentStatusEffects.Contains(Status.Frozen))
             {
+                speed = 0f;
                 // If frozen, take extra damage or some special effect
                 // For simplicity, we just return here
                 return;
@@ -155,15 +157,24 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void KillEnemy()
+    public void KillEnemy(float delay = -1f )
     {
         GetComponent<Animator>()?.SetTrigger("Death");
-        Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+
+        if (delay == -1)
+            delay = destroyDelay;
+
 
         speed = 0f;
         originalSpeed = 0f;
         GetComponent<Collider2D>().enabled = false;
 
-        Destroy(gameObject, 0.7f);
+        DOVirtual.DelayedCall(destroyDelay * 2/3, () =>
+        {
+            Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+
+        });
+
+        Destroy(gameObject, destroyDelay);
     }
 }

@@ -5,6 +5,7 @@ public class Freeze : ProjectileEffect
     [SerializeField] private float effectChanceOverride = 0.2f;
     [SerializeField] private float freezeDuration = 2.0f;
 
+    [SerializeField] private AudioClip[] sounds;
 
     private void Start()
     {
@@ -19,7 +20,8 @@ public class Freeze : ProjectileEffect
             return;
 
         //Debug.Log("Freeze proc!");
-        Enemy.ApplyStatusEffect(Status.Frozen, freezeDuration); 
+        Enemy.ApplyStatusEffect(Status.Frozen, freezeDuration);
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)],loop: false, volume: 1f, pitch: Random.Range(0.9f, 1.1f));
     }
 
     public override void LevelUp()

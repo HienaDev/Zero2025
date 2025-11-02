@@ -9,6 +9,7 @@ public class AddBaseStatModifier : MonoBehaviour
     [SerializeField] private Sprite icon;
     [SerializeField] private Image iconUI;
 
+    [SerializeField] private AudioClip[] sounds;
     public enum StatType
     {
         MaxSpeed,
@@ -98,6 +99,11 @@ public class AddBaseStatModifier : MonoBehaviour
 
     public void AddStat()
     {
+
+
+        AudioManager.Instance.Play(sounds[UnityEngine.Random.Range(0, sounds.Length)], loop: false, volume: 1f, pitch: UnityEngine.Random.Range(0.9f, 1.1f));
+
+
         if (singleStatIncrease)
             switch (statToModify)
             {

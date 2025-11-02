@@ -58,6 +58,19 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float beltChancePerWave = 0.25f;
     [SerializeField] private Vector2 beltSpeedRange = new Vector2(5f, 15f);
 
+    [SerializeField] public Image[] relicDisplay;
+    private int relicIndex = 0;
+
+    public void AddRelicDisplay(Sprite relicSprite)
+    {
+        if (relicIndex < relicDisplay.Length)
+        {
+            relicDisplay[relicIndex].sprite = relicSprite;
+            relicDisplay[relicIndex].color = Color.white;
+            relicIndex++;
+        }
+    }
+
     private void Start()
     {
         playerStats = FindAnyObjectByType<PlayerStats>();

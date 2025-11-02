@@ -360,6 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 384e677003adffc45a7fbf437e9ec71c, type: 3}
   iconUI: {fileID: 4563566308968595676}
+  sounds:
+  - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   singleStatIncrease: 1
   statToModify: 9
   modifierRange: {x: 0.05, y: 0.25}

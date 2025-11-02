@@ -1,11 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PoisonExplosionProjectile : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private float duration;
+
+    [SerializeField] private AudioClip[] sounds;
 
     private void Start()
     {
@@ -28,6 +29,9 @@ public class PoisonExplosionProjectile : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 0);
 
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(1.1f, 1.3f));
+
+
         foreach (var hit in hits)
         {
             if (hit != null)
@@ -49,6 +53,8 @@ public class PoisonExplosionProjectile : MonoBehaviour
         sequence.Join(transform.DOScale(0f, 0.4f).SetEase(Ease.InQuart));
 
         sequence.OnComplete(() => Destroy(gameObject));
+
+
 
     }
 }

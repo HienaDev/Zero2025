@@ -148,7 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 2772557891435779878, guid: d57da2cd47294624fb46157d7322c436, type: 3}
-  icon: {fileID: -3290036551890651271, guid: 2202bcb59ae0a3c418df334e47fd46d3, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
+  icon: {fileID: -4370758041393935430, guid: 686b28d3a03203648b2c138620550d56, type: 3}
   iconUI: {fileID: 6829150893930389950}
 --- !u!1 &7761160304813811765
 GameObject:
@@ -242,7 +244,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.9
+  m_fontSize: 10.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

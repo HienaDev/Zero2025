@@ -327,8 +327,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0, y: -0.1420866}
+  m_Radius: 0.6420863
 --- !u!114 &4611677696065723444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +345,12 @@ MonoBehaviour:
   speed: 1.5
   currentStatusEffects: 
   deathEffectPrefab: {fileID: 5787542957485260482, guid: 4d0d3327cf843624e85f4877af41b10a, type: 3}
+  destroyDelay: 0.7
+  hitSounds:
+  - {fileID: 8300000, guid: 6790c6f2caab44744a8bdf3f8ca69847, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: bece5356fd6b3ee4c945ee6b4df80057, type: 3}
+  - {fileID: 8300000, guid: 6e81c04f746897541b68afcbbab9a9d6, type: 3}
 --- !u!114 &2487113784456417586
 MonoBehaviour:
   m_ObjectHideFlags: 0

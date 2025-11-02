@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -13,6 +15,15 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject soulUI;
 
+    [SerializeField] private float shakeDuration = 0.3f;
+    [SerializeField] private float shakeMagnitude = 0.5f;
+
+
+    [SerializeField] private GameObject deathScreen;
+    [Header("UI Elements")]
+
+    public Image image;
+
     [Header("Player Stats")]
     // Player Health
     [SerializeField] private int maxHealth = 3;
@@ -23,6 +34,9 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
+        soulUI.transform.localScale = Vector3.one * currentHealth / maxHealth;
+        FindAnyObjectByType<CameraShake>().Shake(shakeDuration, shakeMagnitude);
+
         Debug.Log($"Player took {damage} damage. Current health: {currentHealth}/{maxHealth}");
         if (currentHealth <= 0)
         {
@@ -35,11 +49,13 @@ public class PlayerStats : MonoBehaviour
             {
                 guySoul.SetActive(true);
                 Debug.Log("Target enabled!");
+                deathScreen.SetActive(true);
+                image.DOFade(0.8f, 1f).SetEase(Ease.InOutCirc);
+
             });
             //col.enabled = false;
             // Implement player death logic here
-
-            soulUI.transform.localScale = Vector3.one * currentHealth/maxHealth;
+            
         }
     }
 

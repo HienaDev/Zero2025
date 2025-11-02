@@ -13,6 +13,8 @@ public class ChainProjectile : MonoBehaviour
 
     [SerializeField] private ParticleSystem hitEffect;
 
+    [SerializeField] private AudioClip[] sounds;
+
     IEnumerator Start()
     {
         yield return new WaitForSeconds(10f);
@@ -47,6 +49,8 @@ public class ChainProjectile : MonoBehaviour
     // This runs every time a waypoint is reached
     void OnReachWaypoint(int waypointIndex)
     {
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 1f, pitch: Random.Range(0.9f, 1.1f));
+
         enemiesToHit[waypointIndex]?.TakeDamage(damage); // Apply damage to the enemy at this waypoint
         Instantiate(hitEffect, enemiesToHit[waypointIndex].transform.position, Quaternion.identity);
         pathTween.Pause(); 

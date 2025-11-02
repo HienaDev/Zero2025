@@ -224,6 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: ec5306ed1b60445418b6c1cad8bdad83, type: 3}
   iconUI: {fileID: 2359090615810124728}
+  sounds:
+  - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   singleStatIncrease: 1
   statToModify: 1
   modifierRange: {x: 0.05, y: 0.25}

@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 
+
 public class Enemy : MonoBehaviour
 {
 
@@ -22,6 +23,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject deathEffectPrefab;
 
     [SerializeField] private float destroyDelay = 0.7f;
+
+    [SerializeField] private AudioClip[] hitSounds;
+    [SerializeField] private AudioClip[] deathSounds;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,7 +54,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if(currentStatusEffects.Contains(Status.Frozen))
+            AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
+
+
+            if (currentStatusEffects.Contains(Status.Frozen))
             {
                 speed = 0f;
                 // If frozen, take extra damage or some special effect
@@ -160,6 +167,9 @@ public class Enemy : MonoBehaviour
     public void KillEnemy(float delay = -1f )
     {
         GetComponent<Animator>()?.SetTrigger("Death");
+
+        AudioManager.Instance.Play(deathSounds[Random.Range(0, deathSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
+
 
         if (delay == -1)
             delay = destroyDelay;

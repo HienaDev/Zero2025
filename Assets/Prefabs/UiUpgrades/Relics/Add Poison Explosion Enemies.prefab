@@ -287,6 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 8963920898526727781, guid: 938f23a4d46c9dc41b536ec14d938af2, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   icon: {fileID: 7947824952584114664, guid: 9ecfc68e31edf4b4ca227a18ee39dba6, type: 3}
   iconUI: {fileID: 6069018948797605962}
 --- !u!1 &8993878658423463598

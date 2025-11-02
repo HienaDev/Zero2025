@@ -6,6 +6,8 @@ public class ExplosionProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float damage;
 
+    [SerializeField] private AudioClip[] sounds;
+
     private void Start()
     {
         // Random rotation
@@ -25,6 +27,9 @@ public class ExplosionProjectile : MonoBehaviour
     public void ApplyDamage()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 0);
+
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.7f, 0.9f));
+
 
         foreach (var hit in hits)
         {
@@ -47,6 +52,8 @@ public class ExplosionProjectile : MonoBehaviour
         sequence.Join(transform.DOScale(0f, 0.4f).SetEase(Ease.InQuart));
 
         sequence.OnComplete(() => Destroy(gameObject));
+
+        
 
     }
 }

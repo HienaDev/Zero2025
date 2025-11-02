@@ -21,7 +21,7 @@ public class Freeze : ProjectileEffect
 
         //Debug.Log("Freeze proc!");
         Enemy.ApplyStatusEffect(Status.Frozen, freezeDuration);
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)],loop: false, volume: 1f, pitch: Random.Range(0.9f, 1.1f));
+        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)],loop: false, volume: 0.35f, pitch: Random.Range(0.9f, 1.1f));
     }
 
     public override void LevelUp()

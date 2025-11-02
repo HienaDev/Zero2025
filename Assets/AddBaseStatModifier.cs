@@ -58,6 +58,8 @@ public class AddBaseStatModifier : MonoBehaviour
         playerStats = FindAnyObjectByType<PlayerStats>();
         statText = GetComponentInChildren<TextMeshProUGUI>();
 
+        iconUI.sprite = icon;
+
         modifierValue = UnityEngine.Random.Range(modifierRange.x, modifierRange.y);
 
         if (singleStatIncrease)

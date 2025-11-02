@@ -129,8 +129,10 @@ public class Enemy : MonoBehaviour
 
         poison.color = Color.white;
 
+        Vector3 originalSCale = poison.transform.localScale;
+
         poison.transform.localScale = Vector3.zero;
-        poison.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack);
+        poison.transform.DOScale(originalSCale, 0.1f).SetEase(Ease.OutBack);
 
         poisonTween = poison.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
         {
@@ -155,7 +157,13 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
+        GetComponent<Animator>()?.SetTrigger("Death");
         Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+
+        speed = 0f;
+        originalSpeed = 0f;
+        GetComponent<Collider2D>().enabled = false;
+
+        Destroy(gameObject, 0.7f);
     }
 }

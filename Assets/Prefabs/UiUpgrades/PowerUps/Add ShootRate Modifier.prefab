@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a1221bbd054d949b6b57396664f31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 71e513637d7168d409b94c5eeffd1579, type: 3}
+  icon: {fileID: 21300000, guid: 3740dd1d09fe86447bdba10607651ce0, type: 3}
   iconUI: {fileID: 7084899154031064404}
   singleStatIncrease: 1
   statToModify: 4

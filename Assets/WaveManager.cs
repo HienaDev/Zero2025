@@ -55,6 +55,9 @@ public class WaveManager : MonoBehaviour
 
     private PlayerStats playerStats;
 
+    [SerializeField] private float beltChancePerWave = 0.25f;
+    [SerializeField] private Vector2 beltSpeedRange = new Vector2(5f, 15f);
+
     private void Start()
     {
         playerStats = FindAnyObjectByType<PlayerStats>();
@@ -79,6 +82,14 @@ public class WaveManager : MonoBehaviour
                     else
                         text.GetComponent<TextMeshProUGUI>().text = $"Wave {currentWave}";
                 }
+
+                if(UnityEngine.Random.value < beltChancePerWave)
+                {
+                    float beltSpeed = UnityEngine.Random.Range(beltSpeedRange.x, beltSpeedRange.y);
+                    beltSpeed *= UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1; // random direction
+                    FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = (beltSpeed);
+                }
+
                 yield return new WaitForSeconds(timeBetweenWaves - 3f);
 
                 foreach (var text in waveAnnouncementText)

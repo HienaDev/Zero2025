@@ -4,19 +4,17 @@ public class GroundMovement : MonoBehaviour
 {
     private Enemy enemy;
     private PlayerController player;
-
+    private ConveyorBelt conveyorBelt;
     private SpriteRenderer spriteRenderer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = FindAnyObjectByType<PlayerController>();
         enemy = GetComponent<Enemy>();
-
+        conveyorBelt = FindAnyObjectByType<ConveyorBelt>(); // Get the global or nearest conveyor
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveTowardsPlayer();
@@ -25,10 +23,26 @@ public class GroundMovement : MonoBehaviour
 
     public void MoveTowardsPlayer()
     {
-        if (player == null) return;
+        if (player == null || enemy == null) return;
+
+        // Movement direction toward player (only X)
         Vector3 direction = (player.transform.position - transform.position).normalized;
-        direction = new Vector3(direction.x, 0, 0); // only move in x and z directions
-        transform.position += direction * enemy.Speed * Time.deltaTime;
+        direction = new Vector3(direction.x, 0, 0);
+
+        // Base speed from Enemy
+        float baseSpeed = enemy.Speed;
+
+        // Add conveyor effect if present
+        float conveyorSpeed = 0f;
+        if (conveyorBelt != null)
+        {
+            conveyorSpeed = conveyorBelt.conveyorBeltSpeed / -30f;
+        }
+
+        // Combine both for final X movement
+        float totalSpeedX = direction.x * baseSpeed + conveyorSpeed;
+
+        transform.position += new Vector3(totalSpeedX, 0, 0) * Time.deltaTime;
     }
 
     public void FlipSprite()

@@ -54,7 +54,7 @@ public class CameraTweenToPlayer : MonoBehaviour
         else
             Debug.LogError("No Volume with LensDistortion found in scene!");
 
-        TweenIn();
+        TweenOut();
     }
 
     void Update()

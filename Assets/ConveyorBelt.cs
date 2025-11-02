@@ -4,7 +4,7 @@ public class ConveyorBelt : MonoBehaviour
 {
 
     private SpriteRenderer sr;
-    [SerializeField] private float conveyorBeltSpeed = 5f;
+    [SerializeField] public float conveyorBeltSpeed = 5f;
     [SerializeField] private float cogSpeed = 20f;
 
     private PlayerController playerController;

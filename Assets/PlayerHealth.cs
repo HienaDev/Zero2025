@@ -12,11 +12,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.1f;
     private float justGotDamaged;
 
+    private CameraTweenToPlayer cameraTween;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         justGotDamaged = -gracePeriod;
         playerStats = GetComponent<PlayerStats>();
+        cameraTween = FindAnyObjectByType<CameraTweenToPlayer>();
     }
 
     // Update is called once per frame
@@ -56,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
         {
             // Handle player death (e.g., trigger game over sequence)
             Debug.Log("Player has died. Game Over.");
+            cameraTween.TweenIn();
         }
         else
         {

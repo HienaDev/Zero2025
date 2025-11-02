@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 2575609776876419473, guid: 6a93532a4be174e44b8b7f316379cd7d, type: 3}
-  icon: {fileID: -3290036551890651271, guid: 2202bcb59ae0a3c418df334e47fd46d3, type: 3}
+  icon: {fileID: 21300000, guid: c9adb1d2a2098aa4e9fb68fc3356e780, type: 3}
   iconUI: {fileID: 1047548299875825396}
 --- !u!1 &4999539014243598203
 GameObject:

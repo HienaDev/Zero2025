@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int dashingEnemiesPerWave = 6;
 
     [Header("Debug Info")]
-    [SerializeField, ReadOnly] private int currentWave = 1;
+    [SerializeField] private int currentWave = 1;
     [SerializeField, ReadOnly] private bool waveStarted = false;
     [SerializeField, ReadOnly] private bool upgradeChosen = false;
     [SerializeField, ReadOnly] private bool finishedSpawning = true;
@@ -339,9 +339,9 @@ public class WaveManager : MonoBehaviour
 
         Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         Enemy newEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-        newEnemy.health *= (1.1f * currentWave);
-        newEnemy.speed *= (1.05f * currentWave);
-        newEnemy.originalSpeed *= (1.05f * currentWave);
+        newEnemy.health *= 1 + (0.25f * currentWave);
+        newEnemy.speed *= 1 + (0.125f * currentWave);
+        newEnemy.originalSpeed *= 1 + (0.125f * currentWave);
         activeEnemies.Add(newEnemy);
     }
 }

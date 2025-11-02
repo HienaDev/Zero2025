@@ -89,8 +89,12 @@ public class WaveManager : MonoBehaviour
                     beltSpeed *= UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1; // random direction
                     FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = (beltSpeed);
                 }
+                else
+                {
+                    FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = 0f;
+                }
 
-                yield return new WaitForSeconds(timeBetweenWaves - 3f);
+                    yield return new WaitForSeconds(timeBetweenWaves - 3f);
 
                 foreach (var text in waveAnnouncementText)
                 {

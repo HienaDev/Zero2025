@@ -11,6 +11,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private SpriteRenderer gunSprite;
     [SerializeField] private GameObject guySoul;
 
+    [SerializeField] private GameObject soulUI;
+
     [Header("Player Stats")]
     // Player Health
     [SerializeField] private int maxHealth = 3;
@@ -36,6 +38,8 @@ public class PlayerStats : MonoBehaviour
             });
             //col.enabled = false;
             // Implement player death logic here
+
+            soulUI.transform.localScale = Vector3.one * currentHealth/maxHealth;
         }
     }
 

@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
+            AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 2f, pitch: Random.Range(0.9f, 1.1f));
 
 
             if (currentStatusEffects.Contains(Status.Frozen))

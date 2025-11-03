@@ -13194,6 +13194,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1806739172}
     m_Modifications:
+    - target: {fileID: 506411219835254597, guid: d493a7a4d6e5ed74d8b37224310c4c74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4149044089334261865, guid: d493a7a4d6e5ed74d8b37224310c4c74, type: 3}
       propertyPath: m_Name
       value: Add Damage Modifier

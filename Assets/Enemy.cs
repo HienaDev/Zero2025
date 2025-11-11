@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     private Tween iceTween;
     private Tween poisonTween;
+    private Tween burnTween;
 
     public List<Status> currentStatusEffects = new List<Status>();
 
@@ -103,8 +104,47 @@ public class Enemy : MonoBehaviour
                 // Apply poison effect
                 StartCoroutine(ApplyPoisonEffect(duration));
                 break;
+            case Status.Burn:
+                // Apply burn effect
+                StartCoroutine(ApplyBurnEffect(duration));
+                break;
             default:
                 break;
+        }
+    }
+
+    private System.Collections.IEnumerator ApplyBurnEffect(float duration)
+    {
+        Debug.Log("Burn");
+        burnTween?.Kill();
+
+        SpriteRenderer burn = gameObject.GetComponentInChildren<Tag_Burn>().GetComponent<SpriteRenderer>();
+
+        Debug.Log("Burn Sprite: " + burn);  
+
+        currentStatusEffects.Add(Status.Burn);
+
+        burn.color = new Color(1f, 0.64f, 0f);
+
+        Vector3 originalScale = burn.transform.localScale;
+        //burn.transform.localScale = Vector3.zero;
+        //burn.transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutBack);
+
+        burnTween = burn.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
+        {
+            burn.color = Color.clear;
+            currentStatusEffects.Remove(Status.Poison);
+        });
+
+        float elapsed = 0f;
+        float damagePerSecond = 10f; // Example damage per second
+
+        while (elapsed < duration)
+        {
+            // Apply damage once per second
+            TakeDamage(damagePerSecond / 2, new Color(1f, 0.64f, 0f));
+            elapsed += 0.5f;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

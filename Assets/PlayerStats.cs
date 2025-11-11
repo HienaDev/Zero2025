@@ -172,6 +172,8 @@ public class PlayerStats : MonoBehaviour
     public List<ProjectileEffect> ProjectileEffects => projectileEffects;
     public void AddProjectileEffect(ProjectileEffect effect) => projectileEffects.Add(effect);
 
+    public void RemoveProjectileEffect(ProjectileEffect effect) => projectileEffects.Remove(effect);
+
     private void Start()
     {
         AddSpeedModifiers(1.0f);

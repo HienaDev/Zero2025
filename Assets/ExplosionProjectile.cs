@@ -6,6 +6,8 @@ public class ExplosionProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float damage;
 
+    [SerializeField] private bool burn = false;
+
     [SerializeField] private AudioClip[] sounds;
 
     private void Start()
@@ -26,18 +28,28 @@ public class ExplosionProjectile : MonoBehaviour
 
     public void ApplyDamage()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 0);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x);
 
         AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.7f, 0.9f));
 
+        Debug.Log("Bobm Hits length: " + hits.Length);
 
         foreach (var hit in hits)
         {
+            Debug.Log("Bomb Hit: " + hit.name);
             if (hit != null)
             {
                 Enemy enemy = hit.GetComponent<Enemy>();
                 if (enemy != null)
                 {
+                    if(burn)
+                    {
+                        // Apply burn effect for 3.1 seconds
+                        Debug.Log(enemy.name + " burned!");
+                        enemy.ApplyStatusEffect(Status.Burn, 3.1f);
+                    }
+                    
+
                     enemy.TakeDamage(damage);
                 }
             }

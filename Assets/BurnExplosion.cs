@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class Explosion : ProjectileEffect
+public class BurnExplosion : ProjectileEffect
 {
     [SerializeField] private ExplosionProjectile bombPrefab;
 
+
     private void Start()
     {
-        effectChance = 0.15f; // 30% chance to trigger on hit
+        effectChance = 0.2f; // 30% chance to trigger on hit
     }
 
     public override void CallEffect(Enemy Enemy)
@@ -16,7 +17,7 @@ public class Explosion : ProjectileEffect
             return;
 
         ExplosionProjectile poisonBomb = Instantiate(bombPrefab, Enemy.transform.position, Quaternion.identity);
-        poisonBomb.Initialize(25f); 
+        poisonBomb.Initialize(25f);
     }
 
     public override void LevelUp()

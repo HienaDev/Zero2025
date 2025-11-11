@@ -339,9 +339,9 @@ public class WaveManager : MonoBehaviour
 
         Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         Enemy newEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-        newEnemy.health *= 1 + (0.25f * currentWave);
-        newEnemy.speed *= 1 + (0.125f * currentWave);
-        newEnemy.originalSpeed *= 1 + (0.125f * currentWave);
+        newEnemy.health *= 1 + (0.15f * currentWave);
+        newEnemy.speed *= 1 + (0.075f * currentWave);
+        newEnemy.originalSpeed *= 1 + (0.075f * currentWave);
         activeEnemies.Add(newEnemy);
     }
 }

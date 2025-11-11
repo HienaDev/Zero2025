@@ -9052,8 +9052,9 @@ MonoBehaviour:
   - {fileID: 7778034523122194409, guid: facbd5e4c6df2a5408b799067acd60e9, type: 3}
   - {fileID: 580261827380084975, guid: 0c9a793f4019fd74d88680646c9d30ba, type: 3}
   - {fileID: 4973415484122794133, guid: 7cf320c76fafdd44cb8254f641424cb9, type: 3}
-  powerupPrefabs:
   - {fileID: 7726726998146789580, guid: de41f7c7da6a3fd45be9ac5707742583, type: 3}
+  - {fileID: 8441528247443312972, guid: ef3a087f28666454a8a07353cad98ec1, type: 3}
+  powerupPrefabs:
   - {fileID: 4149044089334261865, guid: d493a7a4d6e5ed74d8b37224310c4c74, type: 3}
   - {fileID: 7749830186729264354, guid: bc584b854179cf842955ae0c300715e6, type: 3}
   - {fileID: 2303248558495503107, guid: e8be060754b8f9d4cbda2e7d08f4110c, type: 3}
@@ -9061,7 +9062,6 @@ MonoBehaviour:
   - {fileID: 6221833281334814235, guid: c98747738d6c919409de7dd334cb5541, type: 3}
   - {fileID: 4754823694530987482, guid: b920d1c00c674d8499f7f438ff4e5a26, type: 3}
   - {fileID: 5415410988178418767, guid: 2b34ec05e6f70a9419d028c4791a6ef0, type: 3}
-  - {fileID: 8441528247443312972, guid: ef3a087f28666454a8a07353cad98ec1, type: 3}
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
   beltChancePerWave: 1

@@ -7,6 +7,9 @@ public class AddProjectileEffect : MonoBehaviour
 {
 
     [SerializeField] private ProjectileEffect effectToAdd;
+
+    public ProjectileEffect[] dependsOnThisEffect;
+
     public ProjectileEffect EffectToAdd => effectToAdd;
 
     [SerializeField] private AudioClip[] sounds;

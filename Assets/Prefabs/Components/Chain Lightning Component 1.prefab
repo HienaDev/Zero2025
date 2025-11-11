@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5395656284770704655
+--- !u!1 &4322471050076538794
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2274768844689446440}
-  - component: {fileID: 4598496425888715484}
+  - component: {fileID: 7985513303201638321}
+  - component: {fileID: 1574631329924523612}
   m_Layer: 0
-  m_Name: LaserVertical
+  m_Name: Chain Lightning Component 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2274768844689446440
+--- !u!4 &7985513303201638321
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5395656284770704655}
+  m_GameObject: {fileID: 4322471050076538794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,16 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4598496425888715484
+--- !u!114 &1574631329924523612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5395656284770704655}
+  m_GameObject: {fileID: 4322471050076538794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 131fc2235137a3546a1e513a93fe660f, type: 3}
+  m_Script: {fileID: 11500000, guid: e7a5518257a8e7e45bf0fd81e4237856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserHorizontalPrefab: {fileID: 8330272587601144930, guid: 803a01c1061e4d04696fb0bd3c7d9e65, type: 3}
+  lightningPrefab: {fileID: 2959821318691115571, guid: be946f7c2f2e3d5488299384fe580276, type: 3}
+  ligthtningRange: 5
+  numberOfEenemies: 5
+  speed: 50

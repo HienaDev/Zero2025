@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LaserHorizontal : ProjectileEffect
+public class LaserDiagonal : ProjectileEffect
 {
 
     [SerializeField] private LaserDamage laserHorizontalPrefab;
@@ -10,7 +10,7 @@ public class LaserHorizontal : ProjectileEffect
     private void Start()
     {
         effectChance = 0.2f; // 30% chance to trigger on hit
-        
+
     }
 
     public override void CallEffect(Enemy Enemy)
@@ -23,7 +23,11 @@ public class LaserHorizontal : ProjectileEffect
 
         LaserDamage laser = Instantiate(laserHorizontalPrefab, Enemy.transform.position, Quaternion.identity);
 
-        laser.Initialize(projectile.Damage * damageMultiplier);
+        laser.Initialize(projectile.Damage * damageMultiplier, true, new Vector3(0f, 0f, 135f));
+
+        laser = Instantiate(laserHorizontalPrefab, Enemy.transform.position, Quaternion.identity);
+
+        laser.Initialize(projectile.Damage * damageMultiplier, true, new Vector3(0f, 0f, 45f));
 
     }
 

@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 2326917242576375428}
   - component: {fileID: 8499444479449041817}
   - component: {fileID: 3421693027706371051}
-  - component: {fileID: 6220630231612772718}
   - component: {fileID: 8035810291691248657}
   m_Layer: 5
   m_Name: Add Beam Ghost
@@ -376,19 +375,7 @@ MonoBehaviour:
   - statType: 11
     modifierValue: 0.35
   - statType: 10
-    modifierValue: -15
---- !u!114 &6220630231612772718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7726726998146789580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebb10a10f8ae6e48942b87092852bd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    modifierValue: -10
 --- !u!114 &8035810291691248657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c806ae4be0b6264584daac48f9e9fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectToAdd: {fileID: 6220630231612772718}
+  effectToAdd: {fileID: 2709247467290002787, guid: 6b31770d04a512b478fc5a49a58a65b4, type: 3}
+  dependsOnThisEffect: []
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   icon: {fileID: 21300000, guid: 71e513637d7168d409b94c5eeffd1579, type: 3}

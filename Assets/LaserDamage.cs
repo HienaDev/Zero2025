@@ -10,10 +10,17 @@ public class LaserDamage : MonoBehaviour
 
     [SerializeField] private AudioClip[] sounds;
 
-    public void Initialize(float damage)
+    public void Initialize(float damage, bool diagonal = false, Vector3 initialRotation = default)
     {
         this.damage = damage;
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if(diagonal)
+        {
+            transform.eulerAngles = initialRotation;
+        }
+        else
+            transform.eulerAngles = new Vector3(0, 0, horizontal ? 0 : 90);
 
         ApplyDamage();  
     }
@@ -21,7 +28,7 @@ public class LaserDamage : MonoBehaviour
     public void ApplyDamage()
     {
         Vector2 size = new Vector2(transform.localScale.x, transform.localScale.y);
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, size, 0);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, size, transform.eulerAngles.z);
 
         AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.5f, pitch: Random.Range(0.9f, 1.1f));
 

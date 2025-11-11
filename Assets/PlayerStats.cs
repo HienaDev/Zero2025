@@ -74,6 +74,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
+        soulUI.transform.localScale = Vector3.one * currentHealth / maxHealth;
         Debug.Log($"Player healed {amount}. Current health: {currentHealth}/{maxHealth}");
     }
 
@@ -170,6 +171,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private List<ProjectileEffect> projectileEffects;
     public List<ProjectileEffect> ProjectileEffects => projectileEffects;
     public void AddProjectileEffect(ProjectileEffect effect) => projectileEffects.Add(effect);
+
+    public void RemoveProjectileEffect(ProjectileEffect effect) => projectileEffects.Remove(effect);
 
     private void Start()
     {

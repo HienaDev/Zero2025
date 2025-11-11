@@ -358,8 +358,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c806ae4be0b6264584daac48f9e9fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectToAdd: {fileID: 446816304764332067, guid: 24d07610c61fdcd4eb5db222e07716d6, type: 3}
+  effectToAdd: {fileID: 4598496425888715484, guid: 24d07610c61fdcd4eb5db222e07716d6, type: 3}
+  dependsOnThisEffect: []
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   icon: {fileID: 21300000, guid: b36efbf11d9beac43b9da6ba2960e331, type: 3}
   iconUI: {fileID: 6408514513832792416}
+  onEffectAdded:
+    m_PersistentCalls:
+      m_Calls: []

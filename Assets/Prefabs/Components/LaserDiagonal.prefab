@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2274768844689446440}
-  - component: {fileID: 4598496425888715484}
+  - component: {fileID: 3579963535343181598}
   m_Layer: 0
-  m_Name: LaserVertical
+  m_Name: LaserDiagonal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4598496425888715484
+--- !u!114 &3579963535343181598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5395656284770704655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 131fc2235137a3546a1e513a93fe660f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bbf188a9a3bd4c48adbf71c2b6f4a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserHorizontalPrefab: {fileID: 8330272587601144930, guid: 803a01c1061e4d04696fb0bd3c7d9e65, type: 3}
+  laserHorizontalPrefab: {fileID: 8330272587601144930, guid: 80c1de393a2f1b34a9fc158624415b2a, type: 3}

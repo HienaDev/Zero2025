@@ -10,6 +10,7 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] public float conveyorBeltSpeed = 5f;
     [SerializeField] private float cogSpeed = 20f;
     [SerializeField] private float boxSpeed = 2f;
+    [SerializeField] private float flyingBoxSpeed = 3f;
 
     private PlayerController playerController;
 
@@ -24,10 +25,21 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] private Transform spawnerLeft;
     [SerializeField] private Transform spawnerRight;
 
+    [SerializeField] private GameObject[] flyingBoxPrefabs;
+    [SerializeField] private Vector2 flyingBoxSpawnInterval = new Vector2(5f, 15f);
+    private float currentFlyingBoxSpawnTimer = 0f;
+    private float justSpawnedFlyingBox = 0f;
+    private List<GameObject> spawnedFlyingBoxes;
+    [SerializeField] private float distanceToDestroySpawnedFlyingBoxes = 20f; // If a box crosses this on the X or -X it is destroyed
+    [SerializeField] private Transform flyingBoxSpawnerLeft;
+    [SerializeField] private Transform flyingBoxSpawnerRight;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawnedBoxes = new List<GameObject>();
+        spawnedFlyingBoxes = new List<GameObject>();
 
         sr = GetComponent<SpriteRenderer>();
         playerController = FindAnyObjectByType<PlayerController>();
@@ -50,8 +62,10 @@ public class ConveyorBelt : MonoBehaviour
         }
 
         if(conveyorBeltSpeed != 0)
-            BoxLogic(); 
-
+        {
+            BoxLogic();
+            FlyingBoxLogic();
+        }
     }
 
     private void BoxLogic()
@@ -91,6 +105,49 @@ public class ConveyorBelt : MonoBehaviour
         {
             spawnedBoxes.Remove(box);
             Destroy(box);
+        }
+    }
+
+    private void FlyingBoxLogic()
+    {
+        if (Time.time > justSpawnedFlyingBox + currentFlyingBoxSpawnTimer)
+        {
+            Debug.Log("Time.time: " + Time.time + " justSpawnedFlyingBox: " + justSpawnedFlyingBox + " currentFlyingBoxSpawnTimer: " + currentFlyingBoxSpawnTimer);
+            currentFlyingBoxSpawnTimer = Random.Range(boxSpawnInterval.x, boxSpawnInterval.y);
+            justSpawnedFlyingBox = Time.time;
+
+            GameObject boxToSpawn = flyingBoxPrefabs[Random.Range(0, flyingBoxPrefabs.Length)];
+            GameObject spawnedFlyingBox = Instantiate(boxToSpawn, Vector3.zero, Quaternion.identity);
+            if (conveyorBeltSpeed < 0)
+            {
+                spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerLeft.position.x, flyingBoxSpawnerLeft.position.y, spawnedFlyingBox.transform.position.z);
+            }
+            else
+            {
+                spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerRight.position.x, flyingBoxSpawnerRight.position.y, spawnedFlyingBox.transform.position.z);
+
+            }
+            spawnedFlyingBoxes.Add(spawnedFlyingBox);
+        }
+
+        List<GameObject> flyingboxToBeDestroyed = new List<GameObject>();
+
+        foreach (GameObject flyingbox in spawnedFlyingBoxes)
+        {
+
+                flyingbox.transform.Translate(Vector3.left * conveyorBeltSpeed * flyingBoxSpeed * Time.deltaTime);
+  
+
+            if (Mathf.Abs(flyingbox.transform.position.x) > distanceToDestroySpawnedBoxes)
+            {
+                flyingboxToBeDestroyed.Add(flyingbox);
+            }
+        }
+
+        foreach (GameObject flyingbox in flyingboxToBeDestroyed)
+        {
+            spawnedFlyingBoxes.Remove(flyingbox);
+            Destroy(flyingbox);
         }
     }
 }

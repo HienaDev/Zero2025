@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
@@ -80,6 +81,14 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(WaveLoop());
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            SpawnUpgrades();
+        }
+    }
+
     private IEnumerator WaveLoop()
     {
         // Infinite wave loop (stop when game ends, etc.)
@@ -131,6 +140,7 @@ public class WaveManager : MonoBehaviour
             // Check if wave is finished
             if (finishedSpawning && activeEnemies.Count == 0 && waveStarted)
             {
+                FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = 0f;
                 Debug.Log($"--- Wave {currentWave} Completed ---");
                 foreach (var text in waveCompleteText)
                 {
@@ -170,6 +180,30 @@ public class WaveManager : MonoBehaviour
 
                 // Check if player already has this effect
                 var existing = playerStats.ProjectileEffects.Find(e => e.GetType().Name == effect.GetType().Name);
+
+                ProjectileEffect[] effects = relicEffect.dependsOnThisEffect;
+
+
+                bool hasDependecies = true;
+
+                Debug.Log("current effect: " + effect.GetType().Name + " and dependecies length: " + effects.Length);
+
+                if (effects != null && effects.Length > 0)
+                {
+                    foreach (var dep in effects)
+                    {
+                        var hasEffect = playerStats.ProjectileEffects.Find(e => e.GetType().Name == dep.GetType().Name);
+                        if (hasEffect == null)
+                        {
+                            hasDependecies = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (!hasDependecies)
+                    continue;
+
 
                 if (existing == null)
                 {
@@ -321,7 +355,7 @@ public class WaveManager : MonoBehaviour
             }
 
             // Wait before next spawn cycle, scaled by wave number
-            yield return new WaitForSeconds(Mathf.Max(0.1f, timeBetweenSpawns - 0.1f * waveNumber));
+            yield return new WaitForSeconds(Mathf.Max(0.2f, timeBetweenSpawns - 0.1f * waveNumber));
         }
 
         // Done spawning all enemies for this wave

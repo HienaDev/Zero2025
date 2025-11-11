@@ -74,6 +74,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
+        soulUI.transform.localScale = Vector3.one * currentHealth / maxHealth;
         Debug.Log($"Player healed {amount}. Current health: {currentHealth}/{maxHealth}");
     }
 

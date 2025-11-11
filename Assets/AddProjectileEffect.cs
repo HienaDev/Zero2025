@@ -34,6 +34,7 @@ public class AddProjectileEffect : MonoBehaviour
     {
         AudioManager.Instance.Play(sounds[UnityEngine.Random.Range(0, sounds.Length)], loop: false, volume: 1f, pitch: UnityEngine.Random.Range(0.9f, 1.1f));
 
+        onEffectAdded.Invoke();
 
         if (playerStats != null && effectToAdd != null)
         {

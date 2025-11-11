@@ -2804,7 +2804,7 @@ Transform:
   m_GameObject: {fileID: 444660471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: -3.42, z: 0}
+  m_LocalPosition: {x: 12, y: -3.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3205,7 +3205,7 @@ Transform:
   m_GameObject: {fileID: 516377208}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: -3.42, z: 0}
+  m_LocalPosition: {x: -12, y: -3.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9014,7 +9014,7 @@ MonoBehaviour:
   spawnPointsWalk:
   - {fileID: 1741319942}
   - {fileID: 2023375806}
-  walkingEnemyPrefab: {fileID: 4611677696065723444, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
+  walkingEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
   walkingEnemiesPerWave: 6
   spawnPointsFly:
   - {fileID: 648227595}
@@ -9064,7 +9064,7 @@ MonoBehaviour:
   - {fileID: 5415410988178418767, guid: 2b34ec05e6f70a9419d028c4791a6ef0, type: 3}
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
-  beltChancePerWave: 0.5
+  beltChancePerWave: 0.33
   beltSpeedRange: {x: 5, y: 15}
   relicDisplay:
   - {fileID: 1179903830}

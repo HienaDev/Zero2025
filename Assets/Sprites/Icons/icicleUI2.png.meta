@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9ecfc68e31edf4b4ca227a18ee39dba6
+guid: 1e6a496324a7c974a944b21d75c8d29e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7947824952584114664
-    second: Balulu_0
+      213: 367036076510031602
+    second: icicleUI2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Balulu_0
+      name: icicleUI2_0
       rect:
         serializedVersion: 2
-        x: 619
-        y: 346
-        width: 775
-        height: 1380
+        x: 205
+        y: 161
+        width: 1637
+        height: 1677
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e113cb5fa85c4e60800000000000000
-      internalID: 7947824952584114664
+      spriteID: 2fe2220fd59f71500800000000000000
+      internalID: 367036076510031602
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Balulu_0: 7947824952584114664
+      icicleUI2_0: 367036076510031602
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -35,7 +35,7 @@ public class CameraShake : MonoBehaviour
             // Reduce shake duration
             shakeDuration -= Time.deltaTime * dampingSpeed;
         }
-        else
+        else if(shakeDuration < 0) 
         {
             shakeDuration = 0f;
             transform.localPosition = originalPos;

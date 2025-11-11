@@ -2449,7 +2449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &386951406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9064,7 +9064,7 @@ MonoBehaviour:
   - {fileID: 5415410988178418767, guid: 2b34ec05e6f70a9419d028c4791a6ef0, type: 3}
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
-  beltChancePerWave: 1
+  beltChancePerWave: 0.5
   beltSpeedRange: {x: 5, y: 15}
   relicDisplay:
   - {fileID: 1179903830}
@@ -9728,7 +9728,7 @@ Transform:
   m_GameObject: {fileID: 947535628}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.637, y: -0.071, z: 0}
+  m_LocalPosition: {x: 0.637, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10817,7 +10817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1088529996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11029,7 +11029,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 7009247553473122287, guid: 4013e75bb95776b4a8c79ba48ea3bf25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11820,7 +11820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0.8}
+  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13014,6 +13014,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1806739172}
     m_Modifications:
+    - target: {fileID: 506411219835254597, guid: d493a7a4d6e5ed74d8b37224310c4c74, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4149044089334261865, guid: d493a7a4d6e5ed74d8b37224310c4c74, type: 3}
       propertyPath: m_Name
       value: Add Damage Modifier
@@ -14707,8 +14711,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0943cdc554acc574ba653daf8edff9f6, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 4152714245709627777, guid: d6f5a213b69ef484f909abd1a1423461, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14918,6 +14922,8 @@ MonoBehaviour:
   shakeMagnitude: 1
   deathScreen: {fileID: 1080957650}
   image: {fileID: 1295989410}
+  text1: {fileID: 1088529995}
+  text2: {fileID: 386951405}
   maxHealth: 3
   maxSpeed: 7.5
   acceleration: 200

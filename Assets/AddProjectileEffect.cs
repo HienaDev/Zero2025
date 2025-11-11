@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class AddProjectileEffect : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class AddProjectileEffect : MonoBehaviour
 
     [SerializeField] public Sprite icon;
     [SerializeField] private Image iconUI;
-   
+
+    [SerializeField] private UnityEvent onEffectAdded;
+
 
     private void Start()
     {

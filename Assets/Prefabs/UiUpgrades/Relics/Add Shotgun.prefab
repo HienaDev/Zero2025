@@ -231,6 +231,8 @@ GameObject:
   - component: {fileID: 1600340924709501188}
   - component: {fileID: 1334314240767866505}
   - component: {fileID: 4167459533313710138}
+  - component: {fileID: 5888382180329280108}
+  - component: {fileID: 5603881294203311241}
   m_Layer: 5
   m_Name: Add Shotgun
   m_TagString: Untagged
@@ -341,9 +343,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4167459533313710138}
-        m_TargetAssemblyTypeName: AddBaseStatModifier, Assembly-CSharp
-        m_MethodName: AddStat
+      - m_Target: {fileID: 5888382180329280108}
+        m_TargetAssemblyTypeName: AddProjectileEffect, Assembly-CSharp
+        m_MethodName: AddEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -379,3 +381,47 @@ MonoBehaviour:
     modifierValue: 2
   - statType: 8
     modifierValue: 15
+--- !u!114 &5888382180329280108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441528247443312972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c806ae4be0b6264584daac48f9e9fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectToAdd: {fileID: 5603881294203311241}
+  sounds:
+  - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
+  icon: {fileID: 21300000, guid: b951f38586e14b8428f60083c8859a04, type: 3}
+  iconUI: {fileID: 764329937794243900}
+  onEffectAdded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4167459533313710138}
+        m_TargetAssemblyTypeName: AddBaseStatModifier, Assembly-CSharp
+        m_MethodName: AddStat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5603881294203311241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441528247443312972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf9547e8952a7346977e35dd895fd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

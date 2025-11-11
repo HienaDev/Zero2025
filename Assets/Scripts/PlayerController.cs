@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded && grounded)
         {
-            jumped = false;
+            //jumped = false;
             justGroundedTime = Time.time;
         }
         if (isGrounded)

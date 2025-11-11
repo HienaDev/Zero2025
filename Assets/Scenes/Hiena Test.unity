@@ -9093,7 +9093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyWaves: []
   timeBetweenWaves: 6
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 3
   waveAnnouncementText:
   - {fileID: 1379681389}
   - {fileID: 133409196}

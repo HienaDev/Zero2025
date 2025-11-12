@@ -9157,7 +9157,7 @@ MonoBehaviour:
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
   beltChancePerWave: 1
-  beltSpeedRange: {x: 5, y: 15}
+  beltSpeedRange: {x: 5, y: 10}
   relicDisplay:
   - {fileID: 1179903830}
   - {fileID: 2061517509}

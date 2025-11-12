@@ -2116,11 +2116,11 @@ MonoBehaviour:
   rightSpike: {fileID: 6597777729331995526}
   mouthPoint: {fileID: 284573102120820926}
   projectilePrefab: {fileID: 851641196105649645, guid: 9ee989aeee0900d428864f72f3289933, type: 3}
-  projectileSpeed: 3.5
-  fireInterval: 1
-  projectileCountPerWave: 10
-  spreadAngle: 150
-  projectileCountVariation: 5
+  projectileSpeed: 3
+  fireInterval: 2
+  projectileCountPerWave: 5
+  spreadAngle: 180
+  projectileCountVariation: 2
   faceRoot: {fileID: 6750102725179196799}
   enableSweepAttack: 1
   sweepDistance: 7
@@ -2491,8 +2491,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageable: 0
   executable: 1
-  health: 10000
-  spriteRenderers: []
+  health: 5000
+  spriteRenderers:
+  - {fileID: 4513518888167186016}
+  - {fileID: 3750330697226319604}
+  - {fileID: 5516249752553607437}
+  - {fileID: 8987561341211819123}
+  - {fileID: 4647665502432697716}
+  - {fileID: 6128700883424601514}
+  - {fileID: 9122220473423055865}
   speed: 0
   originalSpeed: 0
   currentStatusEffects: 

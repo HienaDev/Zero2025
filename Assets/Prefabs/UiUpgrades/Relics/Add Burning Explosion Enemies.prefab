@@ -365,7 +365,7 @@ MonoBehaviour:
   removeDependentsOnAdd: 0
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
-  icon: {fileID: -4370758041393935430, guid: 686b28d3a03203648b2c138620550d56, type: 3}
+  icon: {fileID: 21300000, guid: cda1ff6ed4c86ce448d5d4dc51f69540, type: 3}
   iconUI: {fileID: 2947312838275236429}
   onEffectAdded:
     m_PersistentCalls:

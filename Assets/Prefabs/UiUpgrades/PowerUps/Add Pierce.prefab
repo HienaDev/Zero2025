@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a1221bbd054d949b6b57396664f31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 0e23bbb9d60357146beedc888c44dcd7, type: 3}
+  icon: {fileID: 21300000, guid: 78d7bb2194561c04abb0b354d7963389, type: 3}
   iconUI: {fileID: 3219411483798001949}
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}

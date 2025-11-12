@@ -148,10 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 2772557891435779878, guid: d57da2cd47294624fb46157d7322c436, type: 3}
+  dependsOnThisEffect: []
+  removeDependentsOnAdd: 0
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
-  icon: {fileID: -4370758041393935430, guid: 686b28d3a03203648b2c138620550d56, type: 3}
+  icon: {fileID: 21300000, guid: ae32907a192a3ad42bbe47b4ce4ae005, type: 3}
   iconUI: {fileID: 6829150893930389950}
+  onEffectAdded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7761160304813811765
 GameObject:
   m_ObjectHideFlags: 0

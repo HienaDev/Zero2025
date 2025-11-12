@@ -2114,23 +2114,16 @@ MonoBehaviour:
   rightSpikePivot: {fileID: 4365206438780897113}
   rightSpikeElbow: {fileID: 2682354344646985259}
   rightSpike: {fileID: 6597777729331995526}
-  spikeProjectilePrefab: {fileID: 851641196105649645, guid: 9ee989aeee0900d428864f72f3289933, type: 3}
-  spikeProjectileSpeed: 10
-  spikeAttackIntervalRange: {x: 2, y: 4}
-  spikeWaveProjectiles: 6
-  spikeWaveSpread: 45
-  spikeStreamCount: 5
-  spikeStreamDelay: 0.15
   mouthPoint: {fileID: 284573102120820926}
   projectilePrefab: {fileID: 851641196105649645, guid: 9ee989aeee0900d428864f72f3289933, type: 3}
-  projectileSpeed: 5
+  projectileSpeed: 3.5
   fireInterval: 1
   projectileCountPerWave: 10
-  spreadAngle: 120
-  projectileCountVariation: 4
+  spreadAngle: 150
+  projectileCountVariation: 5
   faceRoot: {fileID: 6750102725179196799}
   enableSweepAttack: 1
-  sweepDistance: 8
+  sweepDistance: 7
   sweepSpeed: 3
 --- !u!1 &3148448439667582407
 GameObject:

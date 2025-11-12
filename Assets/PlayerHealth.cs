@@ -43,6 +43,19 @@ public class PlayerHealth : MonoBehaviour
             if (playerStats.IsAlive())
                 enemy.KillEnemy(execute: true);
         }
+
+        EnemyProjectile enemyProjectile = collision.GetComponent<EnemyProjectile>();
+
+        if (enemyProjectile != null)
+        {
+            if (justGotDamaged + gracePeriod > Time.time)
+            {
+                return;
+            }
+            PlayerTakeDamage();
+            if (playerStats.IsAlive())
+                Destroy(enemyProjectile.gameObject);
+        }
     }
 
     public void PlayerTakeDamage()

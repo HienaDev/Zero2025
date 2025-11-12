@@ -1,9 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private PlayerStats playerStats;
-
 
     [SerializeField] private float jumpHoldTime = 0.1f;
     private int jumpCount = 0;
@@ -26,13 +25,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private float conveyorBeltSpeed = 0f;
+
+    private bool canMove = true;
+
+    // 🔹 NEW: reference to an object the player should follow when grabbed
+    private Transform followTarget;
+    [SerializeField] private float followSmoothness = 10f;
+
     public void SetConveyorBeltSpeed(float conveyorSpeed) => conveyorBeltSpeed = conveyorSpeed;
 
     public void SetGrounded(bool isGrounded)
     {
         if (!isGrounded && grounded)
         {
-            //jumped = false;
             justGroundedTime = Time.time;
         }
         if (isGrounded)
@@ -42,38 +47,39 @@ public class PlayerController : MonoBehaviour
         grounded = isGrounded;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody2D>();
-
         originalGravityScale = rb.gravityScale;
-
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         sprite = spriteRenderer.gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // 🔹 If movement is disabled but following a target, smoothly follow it
+        if (!canMove && followTarget != null)
+        {
+            transform.position = Vector3.Lerp(
+                transform.position,
+                followTarget.position,
+                Time.deltaTime * followSmoothness
+            );
+            return;
+        }
+
+        if (!canMove) return;
+
         Vector2 velocity = rb.linearVelocity;
-
-        // Handle horizontal movement
         float inputX = Input.GetAxis("Horizontal");
-
-        // Base target speed from input
         float targetX = inputX * playerStats.MaxSpeed;
 
-        // Add conveyor effect if grounded
         if (grounded)
             targetX += conveyorBeltSpeed;
 
-        // Smoothly approach the target velocity
         velocity.x = Mathf.MoveTowards(velocity.x, targetX, playerStats.Acceleration * Time.deltaTime);
 
-
-        // Handle jumping
         if (Input.GetButtonDown("Jump") && ((grounded || justGroundedTime + coyoteTime > Time.time) || playerStats.JumpNumber > jumpCount))
         {
             jumpCount++;
@@ -88,34 +94,20 @@ public class PlayerController : MonoBehaviour
         }
 
         if (jumped)
-        {
             animator.SetFloat("SpeedY", velocity.y);
-        }
         else
-        {
             animator.SetFloat("SpeedY", 0);
-        }
 
-        //if (jumped && velocity.y < 0) jumped = false;
-
-        animator.SetBool("Jumped", jumped); 
+        animator.SetBool("Jumped", jumped);
 
         if (Input.GetButton("Jump") && Time.time < justJumpedTime + jumpHoldTime)
-        {
             velocity.y = playerStats.JumpForce;
-        }
 
-        // Handle fall gravity
         if (velocity.y < 0)
-        {
             rb.gravityScale = originalGravityScale * fallGravityMultiplier;
-        }
         else
-        {
             rb.gravityScale = originalGravityScale;
-        }
 
-     
         rb.linearVelocity = velocity;
 
         if (grounded)
@@ -126,6 +118,29 @@ public class PlayerController : MonoBehaviour
         UpdateSprite();
     }
 
+    public void EnablePlayerMovement(bool toggle)
+    {
+        if (!toggle)
+        {
+            rb.linearVelocity = Vector2.zero;
+            canMove = false;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+        else
+        {
+            canMove = true;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            followTarget = null; // 🔹 stop following when regaining control
+        }
+    }
+
+    // 🔹 NEW: assign a target for the player to follow (e.g., claw)
+    public void FollowTarget(Transform target)
+    {
+        followTarget = target;
+        EnablePlayerMovement(false);
+    }
+
     public void ApplyExternalForce(Vector2 externalForce)
     {
         rb.AddForce(externalForce, ForceMode2D.Impulse);
@@ -133,19 +148,14 @@ public class PlayerController : MonoBehaviour
 
     void UpdateSprite()
     {
-        // check mouse position to flip sprite
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (mousePosition.x < transform.position.x)
         {
             spriteRenderer.flipX = true;
-            //cannonSprite.flipY = true;
-            //cannonSprite.transform.eulerAngles = new Vector3(0, 180, cannonSprite.transform.eulerAngles.z);
         }
         else
         {
             spriteRenderer.flipX = false;
-            //cannonSprite.flipY = false;
-            //cannonSprite.transform.eulerAngles = new Vector3(0, 0, cannonSprite.transform.eulerAngles.z);
         }
     }
 }

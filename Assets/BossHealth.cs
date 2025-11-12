@@ -47,6 +47,11 @@ public class BossHealth : MonoBehaviour
     private void UpdateHealthUI()
     {
         bossHealthBar.fillAmount = GetTotalHealth() / totalHealth;
+
+        if (bossHealthBar.fillAmount <= 0f)
+        {
+            bossHealthBar.gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     private float GetTotalHealth()

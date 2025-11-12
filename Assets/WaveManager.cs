@@ -15,6 +15,8 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private Wave[] enemyWaves;
 
+    [SerializeField] private GameObject UItoDisappear;
+
     [Header("Wave Settings")]
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float timeBetweenSpawns = 3f;
@@ -94,6 +96,7 @@ public class WaveManager : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
         {
             currentWave = 15;
+            UItoDisappear.SetActive(false);
         }
     }
 

@@ -21,7 +21,8 @@ public class BurnEffect : ProjectileEffect
 
         //Debug.Log("Freeze proc!");
         Enemy.ApplyStatusEffect(Status.Burn, burnDuration);
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.9f, 1.1f));
+        if(sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.9f, 1.1f));
     }
 
     public override void LevelUp()

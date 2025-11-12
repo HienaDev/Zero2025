@@ -87,6 +87,10 @@ public class WaveManager : MonoBehaviour
         {
             SpawnUpgrades();
         }
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            SpawnPowerups();
+        }
     }
 
     private IEnumerator WaveLoop()

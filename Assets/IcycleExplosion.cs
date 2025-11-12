@@ -20,9 +20,10 @@ public class IcycleExplosion : ProjectileEffect
         if (Enemy.currentStatusEffects.Contains(Status.Frozen) == false)
             return;
 
-        Enemy.KillEnemy(0f); // Instantly kill the enemy if frozen
+        Enemy.KillEnemy(0f, execute: true); // Instantly kill the enemy if frozen
 
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.75f, pitch: Random.Range(0.9f, 1.1f));
+        if (sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.75f, pitch: Random.Range(0.9f, 1.1f));
 
 
         float initialOffset = Random.Range(0f, 360f); // Randomize starting angle for variety

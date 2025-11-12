@@ -29,14 +29,15 @@ public class PoisonExplosionProjectile : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 0);
 
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(1.1f, 1.3f));
+        if (sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(1.1f, 1.3f));
 
 
         foreach (var hit in hits)
         {
             if (hit != null)
             {
-                Enemy enemy = hit.GetComponent<Enemy>();
+                Enemy enemy = hit.GetComponentInParent<Enemy>();
                 if (enemy != null)
                 {
                     enemy.ApplyStatusEffect(Status.Poison, duration);

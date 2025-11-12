@@ -39,7 +39,7 @@ public class ChainLightning : ProjectileEffect
             Enemy closestEnemy = null;
             foreach (var hitCollider in hitColliders)
             {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                Enemy enemy = hitCollider.GetComponentInParent<Enemy>();
                 if (enemy != null && enemy != currentEnemy && !enemiesToBeHit.Contains(enemy))
                 {
                     if(Random.value <= 0.25f)

@@ -63,7 +63,8 @@ public class PlayerShoot : MonoBehaviour
 
         playerController.ApplyExternalForce(-cannonSprite.transform.right * playerStats.SelfKnockbackForce);
 
-        AudioManager.Instance.Play(shootSounds[Random.Range(0, shootSounds.Length)], loop: false, volume: 0.1f, pitch: Random.Range(1.3f, 1.5f));
+        if (shootSounds.Length > 0)
+            AudioManager.Instance.Play(shootSounds[Random.Range(0, shootSounds.Length)], loop: false, volume: 0.1f, pitch: Random.Range(1.3f, 1.5f));
 
 
         for (int i = 0; i < playerStats.NumberOfProjectiles; i++)

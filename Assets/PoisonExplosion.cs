@@ -17,7 +17,7 @@ public class PoisonExplosion : ProjectileEffect
         if (Enemy.currentStatusEffects.Contains(Status.Poison) == false)
             return;
 
-        Enemy.KillEnemy(0f); // Instantly kill the enemy if frozen
+        Enemy.KillEnemy(0f, execute: true); // Instantly kill the enemy if frozen
 
         PoisonExplosionProjectile poisonBomb = Instantiate(poisonPrefab, Enemy.transform.position, Quaternion.identity);
         poisonBomb.Initialize(3f); // Poison explosion lasts for 3 seconds

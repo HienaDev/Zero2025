@@ -30,14 +30,15 @@ public class LaserDamage : MonoBehaviour
         Vector2 size = new Vector2(transform.localScale.x, transform.localScale.y);
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, size, transform.eulerAngles.z);
 
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.5f, pitch: Random.Range(0.9f, 1.1f));
+        if (sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.5f, pitch: Random.Range(0.9f, 1.1f));
 
 
         foreach (var hit in hits)
         {
             if (hit != null)
             {
-                Enemy enemy = hit.GetComponent<Enemy>();
+                Enemy enemy = hit.GetComponentInParent<Enemy>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage);

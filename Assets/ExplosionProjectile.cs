@@ -30,7 +30,8 @@ public class ExplosionProjectile : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x);
 
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.7f, 0.9f));
+        if (sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.35f, pitch: Random.Range(0.7f, 0.9f));
 
         Debug.Log("Bobm Hits length: " + hits.Length);
 
@@ -39,7 +40,7 @@ public class ExplosionProjectile : MonoBehaviour
             Debug.Log("Bomb Hit: " + hit.name);
             if (hit != null)
             {
-                Enemy enemy = hit.GetComponent<Enemy>();
+                Enemy enemy = hit.GetComponentInParent<Enemy>();
                 if (enemy != null)
                 {
                     if(burn)

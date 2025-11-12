@@ -27,7 +27,8 @@ public class TMP_FakeSmokeFade : MonoBehaviour
 
     public void FadeIn()
     {
-        AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.25f, pitch: Random.Range(0.9f, 1.1f));
+        if (sounds.Length > 0)
+            AudioManager.Instance.Play(sounds[Random.Range(0, sounds.Length)], loop: false, volume: 0.25f, pitch: Random.Range(0.9f, 1.1f));
 
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         fadeRoutine = StartCoroutine(FadeLetters(true));

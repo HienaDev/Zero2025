@@ -2,13 +2,17 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 
 public class Enemy : MonoBehaviour
 {
 
+    [SerializeField] public bool damageable = true;
+    [SerializeField] public bool executable = true;
+
     [SerializeField] public float health = 100f;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer[] spriteRenderers;
     private Sequence sequence;
 
     [SerializeField] public float speed = 10f;
@@ -31,13 +35,25 @@ public class Enemy : MonoBehaviour
     private Vector3 originalScale;
     public bool isDead => health <= 0f;
 
+
+    [Header("Bounce Settings")]
+    [SerializeField] private float scaleMultiplier = 0.2f;
+    [SerializeField] private float punchDuration = 0.3f;
+    [SerializeField] private int vibrato = 10;
+    [SerializeField] private float elasticity = 10f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         originalScale = transform.localScale;
 
         originalSpeed = speed;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderers == null || spriteRenderers.Length == 0)
+            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        spriteRenderers = spriteRenderers
+        .Where(sr => !sr.GetComponent<Tag_Burn>() && !sr.GetComponent<Tag_Poison>() && !sr.GetComponent<TAG_Ice>())
+        .ToArray();
     }
 
     // Update is called once per frame
@@ -51,12 +67,19 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage, Color damageColor = default)
     {
 
-        if(damageColor == default)
+        if (!damageable || isDead)
+            return;
+
+        if (damageColor == default)
         {
             damageColor = Color.white;
         }
 
         health -= damage;
+
+        if (health < 0)
+            health = 0;
+
         if (health <= 0)
         {
             sequence?.Kill();
@@ -64,7 +87,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 2f, pitch: Random.Range(0.9f, 1.1f));
+            if (hitSounds.Length > 0)
+                AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 2f, pitch: Random.Range(0.9f, 1.1f));
 
 
             if (currentStatusEffects.Contains(Status.Frozen))
@@ -77,15 +101,23 @@ public class Enemy : MonoBehaviour
             // Optional: Add feedback for taking damage (e.g., flash red) using do tween
             sequence?.Kill();
 
-            transform.localScale = originalScale;
+            //transform.localScale = originalScale;
 
             sequence = DOTween.Sequence();
-            transform.DOPunchScale(originalScale * 0.2f, 0.3f, 10, 10f); // exaggerated
+            sequence.AppendCallback(() => transform.localScale = originalScale);
+            transform.DOPunchScale(originalScale * scaleMultiplier, punchDuration, vibrato, elasticity); // exaggerated
             sequence.AppendCallback(() => speed = 0f);
-            sequence.Append(spriteRenderer.DOColor(damageColor, 0.05f).SetEase(Ease.OutQuart));
-            sequence.Append(spriteRenderer.DOColor(Color.white, 0.05f).SetEase(Ease.InQuart));
+            foreach (var sr in spriteRenderers)
+            {
+                sequence.Join(sr.DOColor(damageColor, 0.05f).SetEase(Ease.OutQuart));
+            }
 
-            
+            foreach (var sr in spriteRenderers)
+            {
+                sequence.Join(sr.DOColor(Color.white, 0.05f).SetEase(Ease.InQuart));
+            }
+
+
 
             sequence.AppendInterval(0.1f);
             sequence.AppendCallback(() => speed = originalSpeed);
@@ -130,9 +162,9 @@ public class Enemy : MonoBehaviour
 
         burn.color = new Color(1f, 0.64f, 0f);
 
-        Vector3 originalScale = burn.transform.localScale;
-        //burn.transform.localScale = Vector3.zero;
-        //burn.transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutBack);
+        Vector3 burnOriginalScale = burn.transform.localScale;
+        burn.transform.localScale = Vector3.zero;
+        burn.transform.DOScale(burnOriginalScale, 0.1f).SetEase(Ease.OutBack);
 
         burnTween = burn.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
         {
@@ -192,9 +224,9 @@ public class Enemy : MonoBehaviour
 
         poison.color = Color.white;
 
-        Vector3 originalScale = poison.transform.localScale;
+        Vector3 iceOriginalScale = poison.transform.localScale;
         poison.transform.localScale = Vector3.zero;
-        poison.transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutBack);
+        poison.transform.DOScale(iceOriginalScale, 0.1f).SetEase(Ease.OutBack);
 
         poisonTween = poison.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
         {
@@ -215,11 +247,22 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void KillEnemy(float delay = -1f )
+    public void KillEnemy(float delay = -1f , bool execute = false)
     {
-        GetComponent<Animator>()?.SetTrigger("Death");
 
-        AudioManager.Instance.Play(deathSounds[Random.Range(0, deathSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
+        if(execute && !executable)
+            { return; }
+
+
+        Animator animator = gameObject.GetComponent<Animator>();
+
+        if (animator != null)
+            animator.SetTrigger("Death");
+        else
+            delay = 0f;
+
+        if (deathSounds.Length > 0)
+            AudioManager.Instance.Play(deathSounds[Random.Range(0, deathSounds.Length)], loop: false, volume: 0.2f, pitch: Random.Range(0.9f, 1.1f));
 
 
         if (delay == -1)
@@ -228,7 +271,12 @@ public class Enemy : MonoBehaviour
 
         speed = 0f;
         originalSpeed = 0f;
-        GetComponent<Collider2D>().enabled = false;
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+        
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
 
         DOVirtual.DelayedCall(destroyDelay * 2/3, () =>
         {

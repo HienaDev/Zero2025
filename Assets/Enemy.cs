@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioClip[] hitSounds;
     [SerializeField] private AudioClip[] deathSounds;
 
+    public bool isDead => health <= 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -77,11 +79,12 @@ public class Enemy : MonoBehaviour
             Vector3 originalScale = transform.localScale;
 
             sequence = DOTween.Sequence();
+            transform.DOPunchScale(originalScale * 0.2f, 0.3f, 10, 10f); // exaggerated
             sequence.AppendCallback(() => speed = 0f);
             sequence.Append(spriteRenderer.DOColor(damageColor, 0.05f).SetEase(Ease.OutQuart));
             sequence.Append(spriteRenderer.DOColor(Color.white, 0.05f).SetEase(Ease.InQuart));
 
-            sequence.Join(transform.DOPunchScale(originalScale * 0.2f, 0.3f, 10, 10f)); // exaggerated
+            
 
             sequence.AppendInterval(0.1f);
             sequence.AppendCallback(() => speed = originalSpeed);

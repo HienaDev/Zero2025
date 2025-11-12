@@ -9155,7 +9155,7 @@ MonoBehaviour:
   - {fileID: 5415410988178418767, guid: 2b34ec05e6f70a9419d028c4791a6ef0, type: 3}
   numberOfUpgradesToSpawn: 3
   upgradeOffset: 200
-  beltChancePerWave: 0.33
+  beltChancePerWave: 1
   beltSpeedRange: {x: 5, y: 15}
   relicDisplay:
   - {fileID: 1179903830}
@@ -10211,8 +10211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conveyorBeltSpeed: 0
   cogSpeed: 10
-  boxSpeed: 0.175
-  flyingBoxSpeed: 0.175
+  boxSpeed: 0.15
+  flyingBoxSpeed: 0.15
   cogs:
   - {fileID: 114624294}
   - {fileID: 1661614962}

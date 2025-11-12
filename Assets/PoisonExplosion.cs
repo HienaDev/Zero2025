@@ -6,7 +6,7 @@ public class PoisonExplosion : ProjectileEffect
 
     private void Start()
     {
-        effectChance = 0.3f; // 30% chance to trigger on hit
+        effectChance = 0.25f; // 30% chance to trigger on hit
     }
 
     public override void CallEffect(Enemy Enemy)

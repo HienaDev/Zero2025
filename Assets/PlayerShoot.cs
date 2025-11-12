@@ -88,12 +88,12 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    public void ClusterShot(Transform position, int clusterShotCount)
+    public void ClusterShot(Vector3 position, int clusterShotCount)
     {
         for (int i = 0; i < clusterShotCount; i++)
         {
             // Instantiate the projectile at the player's position
-            Projectile projectile = Instantiate(projectilePrefab, position.position, Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
             projectile.gameObject.transform.eulerAngles = new Vector3(0, 0,
                 (360f / clusterShotCount) * i);
             projectile.Initialize(playerStats.ProjectileSpeed, playerStats.Damage, playerStats.PierceCount);

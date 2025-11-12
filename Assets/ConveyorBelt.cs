@@ -113,7 +113,7 @@ public class ConveyorBelt : MonoBehaviour
         if (Time.time > justSpawnedFlyingBox + currentFlyingBoxSpawnTimer)
         {
             Debug.Log("Time.time: " + Time.time + " justSpawnedFlyingBox: " + justSpawnedFlyingBox + " currentFlyingBoxSpawnTimer: " + currentFlyingBoxSpawnTimer);
-            currentFlyingBoxSpawnTimer = Random.Range(boxSpawnInterval.x, boxSpawnInterval.y);
+            currentFlyingBoxSpawnTimer = Random.Range(flyingBoxSpawnInterval.x, flyingBoxSpawnInterval.y);
             justSpawnedFlyingBox = Time.time;
 
             GameObject boxToSpawn = flyingBoxPrefabs[Random.Range(0, flyingBoxPrefabs.Length)];

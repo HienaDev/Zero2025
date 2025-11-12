@@ -188,7 +188,8 @@ public class PlayerStats : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            damage *= 50f;
+            maxHealth *= 50;
+            currentHealth = maxHealth;
         }
     }
 }

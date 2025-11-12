@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
 
         if(damageColor == default)
         {
-            damageColor = Color.red;
+            damageColor = Color.white;
         }
 
         health -= damage;

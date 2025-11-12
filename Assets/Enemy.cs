@@ -28,12 +28,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioClip[] hitSounds;
     [SerializeField] private AudioClip[] deathSounds;
 
+    private Vector3 originalScale;
     public bool isDead => health <= 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        originalScale = transform.localScale;
 
         originalSpeed = speed;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -76,7 +77,7 @@ public class Enemy : MonoBehaviour
             // Optional: Add feedback for taking damage (e.g., flash red) using do tween
             sequence?.Kill();
 
-            Vector3 originalScale = transform.localScale;
+            transform.localScale = originalScale;
 
             sequence = DOTween.Sequence();
             transform.DOPunchScale(originalScale * 0.2f, 0.3f, 10, 10f); // exaggerated

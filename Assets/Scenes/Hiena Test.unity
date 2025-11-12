@@ -9091,6 +9091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cb31f91b0562d4dbe72cde00d2dcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossPrefab: {fileID: 8395652017234829119, guid: beba426aea8f84748b38a238a8443657, type: 3}
   enemyWaves: []
   timeBetweenWaves: 6
   timeBetweenSpawns: 3
@@ -10226,7 +10227,6 @@ MonoBehaviour:
   - {fileID: 1857495098}
   boxPrefabs:
   - {fileID: 6978330309302432213, guid: 3f47dc0790bcd204d8efcf532369ffc1, type: 3}
-  - {fileID: 6978330309302432213, guid: a2966c9d7cb475746938cd9fbf81474e, type: 3}
   - {fileID: 6978330309302432213, guid: afdf5c8c7b0e143469177688a072cd84, type: 3}
   boxSpawnInterval: {x: 7, y: 20}
   distanceToDestroySpawnedBoxes: 15
@@ -15012,6 +15012,7 @@ MonoBehaviour:
   cannonSprite: {fileID: 268909495}
   fallGravityMultiplier: 1.5
   animator: {fileID: 1899636027}
+  followSmoothness: 10
 --- !u!50 &1912201968
 Rigidbody2D:
   serializedVersion: 5

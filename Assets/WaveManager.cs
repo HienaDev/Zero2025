@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
-
+    [SerializeField] private BossAttacks bossPrefab;
     [Serializable] private struct Enemies { public GameObject enemyType; public int enemyCount; }
     [Serializable] private struct Wave { public Enemies[] enemies; }
 
@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int dashingEnemiesPerWave = 6;
 
     [Header("Debug Info")]
-    [SerializeField] private int currentWave = 1;
+    [SerializeField] public int currentWave = 1;
     [SerializeField, ReadOnly] private bool waveStarted = false;
     [SerializeField, ReadOnly] private bool upgradeChosen = false;
     [SerializeField, ReadOnly] private bool finishedSpawning = true;
@@ -91,6 +91,10 @@ public class WaveManager : MonoBehaviour
         {
             SpawnPowerups();
         }
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            currentWave = 15;
+        }
     }
 
     private IEnumerator WaveLoop()
@@ -128,6 +132,7 @@ public class WaveManager : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(3f);
+                
                 StartCoroutine(StartWave(currentWave));
             }
 
@@ -330,6 +335,22 @@ public class WaveManager : MonoBehaviour
         finishedSpawning = false;
 
         Debug.Log($"--- Starting Wave {waveNumber} ---");
+
+
+        if(waveNumber == 15)
+        {
+            // Spawn boss
+            BossAttacks boss = Instantiate(bossPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            //boss.Initialize(playerStats);
+
+            foreach (Enemy enemy in boss.GetComponentsInChildren<Enemy>())
+            {
+                activeEnemies.Add(enemy);
+            }
+            
+            finishedSpawning = true;
+            yield break;
+        }
 
         // Determine how many enemies to spawn for each type
         int walkRemaining = walkingEnemiesPerWave * waveNumber;

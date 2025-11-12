@@ -40,7 +40,7 @@ public class ClawProjectile : MonoBehaviour
         if (warningSprite != null)
             warningSprite.enabled = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         if (warningSprite != null)
             warningSprite.enabled = false;

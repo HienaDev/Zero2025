@@ -34,10 +34,12 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] private Transform flyingBoxSpawnerLeft;
     [SerializeField] private Transform flyingBoxSpawnerRight;
 
+    private WaveManager waveManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        waveManager = FindAnyObjectByType<WaveManager>();
         spawnedBoxes = new List<GameObject>();
         spawnedFlyingBoxes = new List<GameObject>();
 
@@ -110,6 +112,20 @@ public class ConveyorBelt : MonoBehaviour
 
     private void FlyingBoxLogic()
     {
+        if(waveManager.currentWave == 15)
+        {
+            if(spawnedFlyingBoxes.Count > 0)
+            {
+                foreach (GameObject flyingbox in spawnedFlyingBoxes)
+                {
+                    Destroy(flyingbox);
+                }
+
+                spawnedFlyingBoxes.Clear();
+            }
+
+                return;
+        }
         if (Time.time > justSpawnedFlyingBox + currentFlyingBoxSpawnTimer)
         {
             Debug.Log("Time.time: " + Time.time + " justSpawnedFlyingBox: " + justSpawnedFlyingBox + " currentFlyingBoxSpawnTimer: " + currentFlyingBoxSpawnTimer);

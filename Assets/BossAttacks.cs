@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
+using System.Collections.Generic;
 
 public class BossAttacks : MonoBehaviour
 {
+
+    private bool readyToAttack = false;
+
     private BossHealth bossHealth; // has method AreAllArmsDestroyed()
 
     [Header("Left Arm")]
@@ -81,6 +86,114 @@ public class BossAttacks : MonoBehaviour
     private float sweepStartX;
     private bool sweepingRight = true;
 
+    public IEnumerator BossReviveSequence(Transform bossRoot)
+    {
+        // --- Collect all SpriteRenderers recursively ---
+        List<SpriteRenderer> renderers = new List<SpriteRenderer>(bossRoot.GetComponentsInChildren<SpriteRenderer>());
+
+        // --- Cache original colors ---
+        Dictionary<SpriteRenderer, Color> originalColors = new Dictionary<SpriteRenderer, Color>();
+        foreach (var sr in renderers)
+            originalColors[sr] = sr.color;
+
+        // --- Scale setup ---
+        Vector3 originalScale = bossRoot.localScale;
+        Vector3 smallScale = originalScale * 0.1f;   // smaller start
+        Vector3 scaledUp = originalScale * 0.85f;     // overshoot before jump
+
+        bossRoot.localScale = smallScale;
+
+        // --- Step 1: Start dark (keep alpha intact) ---
+        foreach (var sr in renderers)
+        {
+            Color c = originalColors[sr];
+            c.r *= 0.2f;
+            c.g *= 0.2f;
+            c.b *= 0.2f;
+            sr.color = c;
+        }
+
+        // --- Step 2: Appear slightly (brighten to ~30%) and scale up to normal ---
+        Sequence appearSeq = DOTween.Sequence();
+        appearSeq.Join(bossRoot.DOScale(originalScale, 1.2f).SetEase(Ease.OutQuad));
+
+        foreach (var sr in renderers)
+        {
+            Color target = originalColors[sr];
+            target.r *= 0.3f;
+            target.g *= 0.3f;
+            target.b *= 0.3f;
+            appearSeq.Join(sr.DOColor(target, 1.2f));
+        }
+
+        yield return appearSeq.WaitForCompletion();
+
+        // --- Step 3: Darken again before jumping (charging up) ---
+        Sequence darkenSeq = DOTween.Sequence();
+        foreach (var sr in renderers)
+        {
+            Color darker = originalColors[sr];
+            darker.r *= 0.45f;
+            darker.g *= 0.45f;
+            darker.b *= 0.45f;
+            darkenSeq.Join(sr.DOColor(darker, 0.4f));
+        }
+        yield return darkenSeq.WaitForCompletion();
+
+        // --- Step 4: Squash slightly before jump ---
+        yield return bossRoot.DOScale(scaledUp * 0.9f, 0.15f)
+            .SetEase(Ease.InQuad)
+            .WaitForCompletion();
+
+        // --- Step 5: Jump way higher and faster ---
+        float jumpHeight = 6.5f;
+        float jumpDuration = 0.18f;
+        Vector3 jumpTarget = bossRoot.position + Vector3.up * jumpHeight;
+
+        yield return bossRoot.DOMove(jumpTarget, jumpDuration)
+            .SetEase(Ease.OutCirc)
+            .WaitForCompletion();
+
+        // --- Step 6: Hover briefly ---
+        yield return new WaitForSeconds(0.15f);
+
+        // --- Step 7: Land FAST and hard ---
+        Vector3 landTarget = bossRoot.position - Vector3.up * jumpHeight;
+
+        yield return bossRoot.DOMoveY(landTarget.y, 0.4f)
+            .SetEase(Ease.InCubic)
+            .WaitForCompletion();
+
+        // --- Step 8: Impact squash + 80% brightness ---
+        Sequence impactSeq = DOTween.Sequence();
+
+        // small squash before recovery
+        impactSeq.Append(bossRoot.DOScale(originalScale * 0.9f, 0.1f).SetEase(Ease.InQuad));
+
+        // brightness to 80% while returning to normal scale
+        impactSeq.Append(bossRoot.DOScale(originalScale, 0.2f).SetEase(Ease.OutBack));
+
+        foreach (var sr in renderers)
+        {
+            Color target = originalColors[sr];
+            target.r *= 0.8f;
+            target.g *= 0.8f;
+            target.b *= 0.8f;
+            impactSeq.Join(sr.DOColor(target, 0.3f));
+        }
+
+        yield return impactSeq.WaitForCompletion();
+
+        // --- Step 9: Final full brightness ---
+        yield return new WaitForSeconds(0.15f);
+        Sequence finalSeq = DOTween.Sequence();
+        foreach (var sr in renderers)
+            finalSeq.Join(sr.DOColor(originalColors[sr], 0.3f).SetEase(Ease.OutSine));
+        yield return finalSeq.WaitForCompletion();
+
+        readyToAttack = true;
+    }
+
     private void Start()
     {
         player = FindAnyObjectByType<PlayerController>()?.transform;
@@ -97,10 +210,16 @@ public class BossAttacks : MonoBehaviour
 
         if (faceRoot != null)
             sweepStartX = faceRoot.localPosition.x;
+
+        StartCoroutine(BossReviveSequence(this.transform));
     }
 
     private void Update()
     {
+
+        if(!readyToAttack)
+            return;
+
         // switch to mouth phase once all arms are destroyed
         if (bossHealth != null && bossHealth.AreAllArmsDestroyed())
         {

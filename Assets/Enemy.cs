@@ -202,9 +202,11 @@ public class Enemy : MonoBehaviour
         ice.color = Color.white;
         currentStatusEffects.Add(Status.Frozen);
 
+        Vector3 originalIceScale = ice.transform.localScale;
+
         // Use tween instead to scale the ice very fast in 0.1 seconds and then reduce the transparency over the duration
         ice.transform.localScale = Vector3.zero;
-        ice.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack);
+        ice.transform.DOScale(originalIceScale, 0.1f).SetEase(Ease.OutBack);
 
         iceTween = ice.DOFade(0f, duration).SetEase(Ease.InQuart).OnComplete(() =>
         {

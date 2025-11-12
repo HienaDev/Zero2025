@@ -83,15 +83,15 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.N))
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.N))
         {
             SpawnUpgrades();
         }
-        if(Input.GetKeyDown(KeyCode.M))
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.M))
         {
             SpawnPowerups();
         }
-        if(Input.GetKeyDown(KeyCode.B))
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
         {
             currentWave = 15;
         }

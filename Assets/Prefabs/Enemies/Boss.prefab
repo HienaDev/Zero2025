@@ -2118,9 +2118,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 851641196105649645, guid: 9ee989aeee0900d428864f72f3289933, type: 3}
   projectileSpeed: 3
   fireInterval: 2
-  projectileCountPerWave: 5
-  spreadAngle: 180
-  projectileCountVariation: 2
+  projectileCountPerWave: 6
+  spreadAngle: 120
+  projectileCountVariation: 3
   faceRoot: {fileID: 6750102725179196799}
   enableSweepAttack: 1
   sweepDistance: 7

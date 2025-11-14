@@ -140,7 +140,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Horizontal \nLaser"
+  m_text: '<u><b>Laser Ghost:</b></u>
+
+    <size=75%>shots have a chance to create
+    an horizontal beam
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
   m_sharedMaterial: {fileID: 743051343549308371, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
@@ -167,7 +172,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.3
+  m_fontSize: 12.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -359,7 +364,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 446816304764332067, guid: 29ddfd98eecde1744bac157d94096ced, type: 3}
+  dependsOnThisEffect: []
+  removeDependentsOnAdd: 0
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}
   icon: {fileID: 21300000, guid: 84f8459f2ad36234fb2e3871d102f1c3, type: 3}
   iconUI: {fileID: 9147329857065663500}
+  onEffectAdded:
+    m_PersistentCalls:
+      m_Calls: []

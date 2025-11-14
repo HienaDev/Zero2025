@@ -140,9 +140,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Diagonal
+  m_text: '<u><b>Diagonal Laser:</b></u>
 
-    Laser
+    <size=75%>shots have a chance to create
+    an x crossed beam
 
 '
   m_isRightToLeft: 0
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.85
+  m_fontSize: 10.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

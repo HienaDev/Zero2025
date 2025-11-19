@@ -110,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7446173427186934960}
   - component: {fileID: 1768534261093249255}
+  - component: {fileID: 1733593277556573503}
   m_Layer: 0
   m_Name: Indicator
   m_TagString: Untagged
@@ -187,6 +188,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1733593277556573503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371512390057228179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4d251d845f5b646aadbf59986dcc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2252713407999084424
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0aa6aba9d3723488d11e64ab0ec410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageable: 1
+  executable: 1
   health: 50
+  spriteRenderers: []
   speed: 1
   originalSpeed: 0
   currentStatusEffects: 
@@ -441,6 +457,10 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: bece5356fd6b3ee4c945ee6b4df80057, type: 3}
   - {fileID: 8300000, guid: 6e81c04f746897541b68afcbbab9a9d6, type: 3}
+  scaleMultiplier: 0.2
+  punchDuration: 0.3
+  vibrato: 10
+  elasticity: 10
 --- !u!114 &2196111795039843219
 MonoBehaviour:
   m_ObjectHideFlags: 0

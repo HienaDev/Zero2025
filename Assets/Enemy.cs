@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         spriteRenderers = spriteRenderers
-        .Where(sr => !sr.GetComponent<Tag_Burn>() && !sr.GetComponent<Tag_Poison>() && !sr.GetComponent<TAG_Ice>())
+        .Where(sr => !sr.GetComponent<Tag_Burn>() && !sr.GetComponent<Tag_Poison>() && !sr.GetComponent<TAG_Ice>() && !sr.GetComponent<TAG_Indicator>())
         .ToArray();
     }
 
@@ -242,7 +242,7 @@ public class Enemy : MonoBehaviour
         while (elapsed < duration)
         {
             // Apply damage once per second
-            TakeDamage(damagePerSecond, Color.magenta);
+            TakeDamage(damagePerSecond, new Color(1.0f, 0.75f, 0.8f, 1.0f));
             elapsed += 1f;
             yield return new WaitForSeconds(1f);
         }

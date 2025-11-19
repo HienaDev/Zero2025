@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc5eed209e112f4fa71fdaeab307d77, type: 3}
+  m_Name: Wave2
+  m_EditorClassIdentifier: 
+  WalkingEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
+  FlyingEnemyPrefab: {fileID: 7746689842068886596, guid: a8ce38bb7e75b3d4b93b6c17143e1e75, type: 3}
+  DashingEnemyPrefab: {fileID: 4656141809176135765, guid: 6315ea4fddb74a54d9598afba6e28129, type: 3}
+  DroppedEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
+  FlyingBoxPrefab: {fileID: 6978330309302432213, guid: a2966c9d7cb475746938cd9fbf81474e, type: 3}
+  GroundBoxBigPrefab: {fileID: 6978330309302432213, guid: 3f47dc0790bcd204d8efcf532369ffc1, type: 3}
+  GroundBoxSmallPrefab: {fileID: 6978330309302432213, guid: afdf5c8c7b0e143469177688a072cd84, type: 3}
+  generalEnemySpeedBoost: 1
+  generalEnemyHealthBoost: 1.4
+  waveEvents:
+  - delay: 0
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 2
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 5
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0
+  - delay: 2
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0
+  - delay: 5
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 2
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 0
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0
+  - delay: 5
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0
+  - delay: 0
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 1
+    entityType: 3
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 0
+    conveyorSpeed: 0
+  - delay: 2
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 2
+    conveyorSpeed: 0
+  - delay: 0
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0
+  - delay: 2
+    entityType: 0
+    speedBoost: 1
+    healthBoost: 1
+    spawnPosition: 1
+    conveyorSpeed: 0

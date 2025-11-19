@@ -465,7 +465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0aa6aba9d3723488d11e64ab0ec410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageable: 1
+  executable: 1
   health: 75
+  spriteRenderers: []
   speed: 0.5
   originalSpeed: 0
   currentStatusEffects: 
@@ -476,6 +479,10 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: bece5356fd6b3ee4c945ee6b4df80057, type: 3}
   - {fileID: 8300000, guid: 6e81c04f746897541b68afcbbab9a9d6, type: 3}
+  scaleMultiplier: 0.2
+  punchDuration: 0.3
+  vibrato: 10
+  elasticity: 10
 --- !u!114 &7808744946195886239
 MonoBehaviour:
   m_ObjectHideFlags: 0

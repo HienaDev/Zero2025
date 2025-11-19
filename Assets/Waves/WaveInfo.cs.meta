@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: dfc5eed209e112f4fa71fdaeab307d77
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - WalkingEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
+  - FlyingEnemyPrefab: {fileID: 7746689842068886596, guid: a8ce38bb7e75b3d4b93b6c17143e1e75, type: 3}
+  - DashingEnemyPrefab: {fileID: 4656141809176135765, guid: 6315ea4fddb74a54d9598afba6e28129, type: 3}
+  - DroppedEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
+  - FlyingBoxPrefab: {fileID: 6978330309302432213, guid: a2966c9d7cb475746938cd9fbf81474e, type: 3}
+  - GroundBoxBigPrefab: {fileID: 6978330309302432213, guid: 3f47dc0790bcd204d8efcf532369ffc1, type: 3}
+  - GroundBoxSmallPrefab: {fileID: 6978330309302432213, guid: afdf5c8c7b0e143469177688a072cd84, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

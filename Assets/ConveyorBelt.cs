@@ -53,8 +53,8 @@ public class ConveyorBelt : MonoBehaviour
     void Update()
     {
         sr.size += new Vector2(conveyorBeltSpeed * Time.deltaTime, 0);
-        if(conveyorBeltSpeed != 0)
-            playerController.SetConveyorBeltSpeed(conveyorBeltSpeed / -5f );
+        if (conveyorBeltSpeed != 0)
+            playerController.SetConveyorBeltSpeed(conveyorBeltSpeed / -5f);
         else
             playerController.SetConveyorBeltSpeed(0f);
 
@@ -63,35 +63,43 @@ public class ConveyorBelt : MonoBehaviour
             cog.Rotate(0, 0, conveyorBeltSpeed * cogSpeed * Time.deltaTime);
         }
 
-        if(conveyorBeltSpeed != 0)
+        if (conveyorBeltSpeed != 0)
         {
-            BoxLogic();
-            FlyingBoxLogic();
+            BoxMovement();
+            FlyingBoxMovement();
         }
     }
 
-    private void BoxLogic()
+    public void SpawnGroundBox(GameObject boxPrefab)
     {
-        if (Time.time > justSpawnedBox + currentBoxSpawnTimer)
+        GameObject spawnedBox = Instantiate(boxPrefab, Vector3.zero, Quaternion.identity);
+        if (conveyorBeltSpeed < 0)
         {
-            Debug.Log("Time.time: " + Time.time + " justSpawnedBox: " + justSpawnedBox + " currentBoxSpawnTimer: " + currentBoxSpawnTimer);
-            currentBoxSpawnTimer = Random.Range(boxSpawnInterval.x, boxSpawnInterval.y);
-            justSpawnedBox = Time.time;
-
-            GameObject boxToSpawn = boxPrefabs[Random.Range(0, boxPrefabs.Length)];
-            GameObject spawnedBox = Instantiate(boxToSpawn, Vector3.zero, Quaternion.identity);
-            if (conveyorBeltSpeed < 0)
-            {
-                spawnedBox.transform.position = new Vector3(spawnerLeft.position.x, spawnerLeft.position.y, spawnedBox.transform.position.z);
-            }
-            else
-            {
-                spawnedBox.transform.position = new Vector3(spawnerRight.position.x, spawnerRight.position.y, spawnedBox.transform.position.z);
-
-            }
-            spawnedBoxes.Add(spawnedBox);
+            spawnedBox.transform.position = new Vector3(spawnerLeft.position.x, spawnerLeft.position.y, spawnedBox.transform.position.z);
         }
+        else
+        {
+            spawnedBox.transform.position = new Vector3(spawnerRight.position.x, spawnerRight.position.y, spawnedBox.transform.position.z);
+        }
+        spawnedBoxes.Add(spawnedBox);
+    }
 
+    public void SpawnFlyingBox(GameObject flyingBoxPrefab)
+    {
+        GameObject spawnedFlyingBox = Instantiate(flyingBoxPrefab, Vector3.zero, Quaternion.identity);
+        if (conveyorBeltSpeed < 0)
+        {
+            spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerLeft.position.x, flyingBoxSpawnerLeft.position.y, spawnedFlyingBox.transform.position.z);
+        }
+        else
+        {
+            spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerRight.position.x, flyingBoxSpawnerRight.position.y, spawnedFlyingBox.transform.position.z);
+        }
+        spawnedFlyingBoxes.Add(spawnedFlyingBox);
+    }
+
+    private void BoxMovement()
+    {
         List<GameObject> boxToBeDestroyed = new List<GameObject>();
 
         foreach (GameObject box in spawnedBoxes)
@@ -110,49 +118,15 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-    private void FlyingBoxLogic()
+    private void FlyingBoxMovement()
     {
-        if(waveManager.currentWave == 15)
-        {
-            if(spawnedFlyingBoxes.Count > 0)
-            {
-                foreach (GameObject flyingbox in spawnedFlyingBoxes)
-                {
-                    Destroy(flyingbox);
-                }
-
-                spawnedFlyingBoxes.Clear();
-            }
-
-                return;
-        }
-        if (Time.time > justSpawnedFlyingBox + currentFlyingBoxSpawnTimer)
-        {
-            Debug.Log("Time.time: " + Time.time + " justSpawnedFlyingBox: " + justSpawnedFlyingBox + " currentFlyingBoxSpawnTimer: " + currentFlyingBoxSpawnTimer);
-            currentFlyingBoxSpawnTimer = Random.Range(flyingBoxSpawnInterval.x, flyingBoxSpawnInterval.y);
-            justSpawnedFlyingBox = Time.time;
-
-            GameObject boxToSpawn = flyingBoxPrefabs[Random.Range(0, flyingBoxPrefabs.Length)];
-            GameObject spawnedFlyingBox = Instantiate(boxToSpawn, Vector3.zero, Quaternion.identity);
-            if (conveyorBeltSpeed < 0)
-            {
-                spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerLeft.position.x, flyingBoxSpawnerLeft.position.y, spawnedFlyingBox.transform.position.z);
-            }
-            else
-            {
-                spawnedFlyingBox.transform.position = new Vector3(flyingBoxSpawnerRight.position.x, flyingBoxSpawnerRight.position.y, spawnedFlyingBox.transform.position.z);
-
-            }
-            spawnedFlyingBoxes.Add(spawnedFlyingBox);
-        }
-
         List<GameObject> flyingboxToBeDestroyed = new List<GameObject>();
 
         foreach (GameObject flyingbox in spawnedFlyingBoxes)
         {
 
-                flyingbox.transform.Translate(Vector3.left * conveyorBeltSpeed * flyingBoxSpeed * Time.deltaTime);
-  
+            flyingbox.transform.Translate(Vector3.left * conveyorBeltSpeed * flyingBoxSpeed * Time.deltaTime);
+
 
             if (Mathf.Abs(flyingbox.transform.position.x) > distanceToDestroySpawnedBoxes)
             {

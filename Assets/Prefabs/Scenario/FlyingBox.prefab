@@ -438,7 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509250073976232735}
   m_Layer: 7
-  m_Name: Floor Box 1
+  m_Name: FlyingBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

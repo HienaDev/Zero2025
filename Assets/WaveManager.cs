@@ -13,38 +13,25 @@ public class WaveManager : MonoBehaviour
     [Serializable] private struct Enemies { public GameObject enemyType; public int enemyCount; }
     [Serializable] private struct Wave { public Enemies[] enemies; }
 
-    [SerializeField] private Wave[] enemyWaves;
+    [SerializeField] private WaveInfo[] waves;
 
     [SerializeField] private GameObject UItoDisappear;
 
+    [Header("SpawnPositions")]
+    [SerializeField] private Transform[] spawnPositions;
+
     [Header("Wave Settings")]
     [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float timeBetweenSpawns = 3f;
     [SerializeField] private TMP_FakeSmokeFade[] waveAnnouncementText;
     [SerializeField] private TMP_FakeSmokeFade[] waveCompleteText;
-
-    [Header("Walking Enemies")]
-    [SerializeField] private Transform[] spawnPointsWalk;
-    [SerializeField] private Enemy walkingEnemyPrefab;
-    [SerializeField] private int walkingEnemiesPerWave = 6;
-
-    [Header("Flying Enemies")]
-    [SerializeField] private Transform[] spawnPointsFly;
-    [SerializeField] private Enemy flyingEnemyPrefab;
-    [SerializeField] private int flyingEnemiesShowUpOnWave = 3;
-    [SerializeField] private int flyingEnemiesPerWave = 8;
-
-    [Header("Dashing Enemies")]
-    [SerializeField] private Transform[] spawnPointsDash;
-    [SerializeField] private Enemy dashingEnemyPrefab;
-    [SerializeField] private int dashingEnemiesShowUpOnWave = 6;
-    [SerializeField] private int dashingEnemiesPerWave = 6;
 
     [Header("Debug Info")]
     [SerializeField] public int currentWave = 1;
     [SerializeField, ReadOnly] private bool waveStarted = false;
     [SerializeField, ReadOnly] private bool upgradeChosen = false;
     [SerializeField, ReadOnly] private bool finishedSpawning = true;
+    [SerializeField, ReadOnly] private bool bossSpawned = false;
+    [SerializeField, ReadOnly] private bool gameOver = false;
 
     [Header("Upgrades")]
     [SerializeField] private Transform lvlUpScreen;
@@ -60,6 +47,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private float beltChancePerWave = 0.25f;
     [SerializeField] private Vector2 beltSpeedRange = new Vector2(5f, 15f);
+    private ConveyorBelt conveyorBelt;
 
     [SerializeField] public Image[] relicDisplay;
     private int relicIndex = 0;
@@ -76,6 +64,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        conveyorBelt = FindAnyObjectByType<ConveyorBelt>();
         playerStats = FindAnyObjectByType<PlayerStats>();
         upgradeChosen = false;
         SpawnUpgrades();
@@ -85,15 +74,15 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.N))
         {
             SpawnUpgrades();
         }
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.M))
         {
             SpawnPowerups();
         }
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
         {
             currentWave = 15;
             UItoDisappear.SetActive(false);
@@ -110,24 +99,15 @@ public class WaveManager : MonoBehaviour
                 foreach (var text in waveAnnouncementText)
                 {
                     text.gameObject.SetActive(true);
-                    if(currentWave < 10)
+                    if (currentWave < 10)
                         text.GetComponent<TextMeshProUGUI>().text = $"Wave 0{currentWave}";
                     else
                         text.GetComponent<TextMeshProUGUI>().text = $"Wave {currentWave}";
                 }
 
-                if(UnityEngine.Random.value < beltChancePerWave)
-                {
-                    float beltSpeed = UnityEngine.Random.Range(beltSpeedRange.x, beltSpeedRange.y);
-                    beltSpeed *= UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1; // random direction
-                    FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = (beltSpeed);
-                }
-                else
-                {
-                    FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = 0f;
-                }
+                //FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = waves[currentWave - 1].conve
 
-                    yield return new WaitForSeconds(timeBetweenWaves - 3f);
+                yield return new WaitForSeconds(timeBetweenWaves - 3f);
 
                 foreach (var text in waveAnnouncementText)
                 {
@@ -135,7 +115,7 @@ public class WaveManager : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(3f);
-                
+
                 StartCoroutine(StartWave(currentWave));
             }
 
@@ -152,6 +132,10 @@ public class WaveManager : MonoBehaviour
             // Check if wave is finished
             if (finishedSpawning && activeEnemies.Count == 0 && waveStarted)
             {
+
+                if (bossSpawned)
+                    gameOver = true;
+
                 FindAnyObjectByType<ConveyorBelt>().conveyorBeltSpeed = 0f;
                 Debug.Log($"--- Wave {currentWave} Completed ---");
                 foreach (var text in waveCompleteText)
@@ -165,6 +149,10 @@ public class WaveManager : MonoBehaviour
                     text.FadeOut();
                 }
                 yield return new WaitForSeconds(3f);
+
+                if (gameOver)
+                    yield break;
+
                 waveStarted = false;
 
                 upgradeChosen = false;
@@ -175,7 +163,7 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnUpgrades()
     {
-        lvlUpScreen.parent.gameObject.SetActive(true);    
+        lvlUpScreen.parent.gameObject.SetActive(true);
         // If odd wave → relics; even → powerups
         if (currentWave % 2 == 1)
         {
@@ -247,7 +235,7 @@ public class WaveManager : MonoBehaviour
                 // 50% chance to show a level-up if any are available
                 bool canLvlUp = effectsToLevelUp.Count > 0 && UnityEngine.Random.value < 0.5f;
 
-                if(possibleRelics.Count == 0 && effectsToLevelUp.Count > 0)
+                if (possibleRelics.Count == 0 && effectsToLevelUp.Count > 0)
                 {
                     canLvlUp = true; // force level-up if no new relics are available
                 }
@@ -281,7 +269,7 @@ public class WaveManager : MonoBehaviour
 
                 // Attach button logic
                 Button upgradeButton = upgradeInstance.GetComponent<Button>();
-                upgradeButton.onClick.AddListener(() => { FinishUpgrading();});
+                upgradeButton.onClick.AddListener(() => { FinishUpgrading(); });
 
                 spawned++;
             }
@@ -339,8 +327,9 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log($"--- Starting Wave {waveNumber} ---");
 
+        WaveInfo waveInfo = waves[waveNumber - 1];
 
-        if(waveNumber == 15)
+        if (waveInfo == null)
         {
             // Spawn boss
             BossAttacks boss = Instantiate(bossPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
@@ -350,45 +339,70 @@ public class WaveManager : MonoBehaviour
             {
                 activeEnemies.Add(enemy);
             }
-            
+
             finishedSpawning = true;
             yield break;
         }
 
-        // Determine how many enemies to spawn for each type
-        int walkRemaining = walkingEnemiesPerWave * waveNumber;
-        int flyRemaining = (waveNumber >= flyingEnemiesShowUpOnWave) ? flyingEnemiesPerWave * (waveNumber - flyingEnemiesShowUpOnWave + 1) : 0;
-        int dashRemaining = (waveNumber >= dashingEnemiesShowUpOnWave) ? dashingEnemiesPerWave * (waveNumber - dashingEnemiesPerWave + 1) : 0;
+        
+        
 
-        // Keep spawning until all counts hit zero
-        while (walkRemaining > 0 || flyRemaining > 0 || dashRemaining > 0)
+        WaveEvent[] events = waveInfo.waveEvents;
+
+        foreach (var waveEvent in events)
         {
-            // Spawn 1 of each available type per cycle
-            if (walkRemaining > 0)
-            {
-                SpawnEnemy(walkingEnemyPrefab, spawnPointsWalk);
-                walkRemaining--;
-            }
+            float timeBetweenEvents = waveEvent.delay;
 
-            if (flyRemaining > 0)
-            {
-                SpawnEnemy(flyingEnemyPrefab, spawnPointsFly);
-                flyRemaining--;
-            }
+            yield return new WaitForSeconds(timeBetweenEvents);
 
-            if (dashRemaining > 0)
+            Enemy enemyTemp;
+            switch (waveEvent.entityType)
             {
-                SpawnEnemy(dashingEnemyPrefab, spawnPointsDash);
-                dashRemaining--;
-            }
+                // Fill in for every entity type
+                case Entity.WalkingEnemy:
+                    enemyTemp = Instantiate(waveInfo.WalkingEnemyPrefab, Vector3.zero, Quaternion.identity);
+                    enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
+                    enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
+                    enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    break;
+                case Entity.FlyingEnemy:
+                    enemyTemp = Instantiate(waveInfo.FlyingEnemyPrefab, Vector3.zero, Quaternion.identity);
+                    enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
+                    enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
+                    enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    break;
+                case Entity.DashingEnemy:
+                    enemyTemp = Instantiate(waveInfo.DashingEnemyPrefab, Vector3.zero, Quaternion.identity);
+                    enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
+                    enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
+                    enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    break;
+                case Entity.DroppedEnemy:
+                    enemyTemp = Instantiate(waveInfo.DroppedEnemyPrefab, Vector3.zero, Quaternion.identity);
+                    enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
+                    enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
+                    enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    break;
+                case Entity.FlyingBox:
+                    conveyorBelt.SpawnFlyingBox(waveInfo.FlyingBoxPrefab);
+                    break;
+                case Entity.GroundBoxBig:
+                    conveyorBelt.SpawnGroundBox(waveInfo.GroundBoxBigPrefab);
+                    break;
+                case Entity.GroundBoxSmall:
+                    conveyorBelt.SpawnGroundBox(waveInfo.GroundBoxSmallPrefab);
+                    break;
+                case Entity.ConveyorBelt:
+                    conveyorBelt.conveyorBeltSpeed = waveEvent.conveyorSpeed;
+                    break;
 
-            // Wait before next spawn cycle, scaled by wave number
-            yield return new WaitForSeconds(Mathf.Max(0.2f, timeBetweenSpawns - 0.1f * waveNumber));
+            }
+            
         }
 
         // Done spawning all enemies for this wave
         finishedSpawning = true;
-        
+
         currentWave++;
 
         Debug.Log($"--- Finished Spawning Wave {waveNumber} ---");

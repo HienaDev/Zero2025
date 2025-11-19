@@ -9092,41 +9092,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossPrefab: {fileID: 8395652017234829119, guid: beba426aea8f84748b38a238a8443657, type: 3}
-  enemyWaves: []
+  waves: []
   UItoDisappear: {fileID: 1048956774}
+  spawnPositions: []
   timeBetweenWaves: 6
-  timeBetweenSpawns: 3
   waveAnnouncementText:
   - {fileID: 1379681389}
   - {fileID: 133409196}
   waveCompleteText:
   - {fileID: 2052548983}
   - {fileID: 1058705335}
-  spawnPointsWalk:
-  - {fileID: 1741319942}
-  - {fileID: 2023375806}
-  walkingEnemyPrefab: {fileID: 1904551879515343111, guid: 889c8d3ffdc1e6c42a978f860bf24e6b, type: 3}
-  walkingEnemiesPerWave: 6
-  spawnPointsFly:
-  - {fileID: 648227595}
-  - {fileID: 1386172170}
-  - {fileID: 556237074}
-  - {fileID: 880478009}
-  - {fileID: 1657362362}
-  - {fileID: 1610774830}
-  - {fileID: 71442816}
-  - {fileID: 1336096993}
-  flyingEnemyPrefab: {fileID: 7746689842068886596, guid: a8ce38bb7e75b3d4b93b6c17143e1e75, type: 3}
-  flyingEnemiesShowUpOnWave: 3
-  flyingEnemiesPerWave: 8
-  spawnPointsDash:
-  - {fileID: 556237074}
-  - {fileID: 880478009}
-  - {fileID: 1657362362}
-  - {fileID: 1336096993}
-  dashingEnemyPrefab: {fileID: 4656141809176135765, guid: 6315ea4fddb74a54d9598afba6e28129, type: 3}
-  dashingEnemiesShowUpOnWave: 6
-  dashingEnemiesPerWave: 2
   currentWave: 1
   waveStarted: 0
   upgradeChosen: 0

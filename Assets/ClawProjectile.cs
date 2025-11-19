@@ -15,9 +15,13 @@ public class ClawProjectile : MonoBehaviour
     private Vector3 shotPosition;            // where it was shot from
     private System.Action onRetractComplete;
 
+    private Collider2D clawCol;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        clawCol = GetComponentInChildren<Collider2D>();
 
         if (warningSprite != null)
             warningSprite.enabled = false;
@@ -57,8 +61,19 @@ public class ClawProjectile : MonoBehaviour
         // 3️⃣ Wait until stopped by collision
         yield return new WaitUntil(() => !launched);
 
+        clawCol.enabled = false;
+
         // 4️⃣ Stay for 3 seconds
-        yield return new WaitForSeconds(3f);
+        float timeElapsed = 0f;
+        Vector3 initialPosition = transform.position;
+        while (timeElapsed < 3f)
+        {
+            timeElapsed += Time.deltaTime;
+            // Claw stays in place even with enemy damage shake
+            transform.position = initialPosition;
+            yield return null;
+        }
+
 
         // 5️⃣ Retract
         retracting = true;
@@ -76,6 +91,8 @@ public class ClawProjectile : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
+
+        clawCol.enabled = true;
 
         // Reached pivot → line can disappear now
         if (lineRenderer != null)

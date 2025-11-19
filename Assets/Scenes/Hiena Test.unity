@@ -524,7 +524,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71442815}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3566,7 +3566,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556237073}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3911,7 +3911,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648227594}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -9094,7 +9094,17 @@ MonoBehaviour:
   bossPrefab: {fileID: 8395652017234829119, guid: beba426aea8f84748b38a238a8443657, type: 3}
   waves: []
   UItoDisappear: {fileID: 1048956774}
-  spawnPositions: []
+  spawnPositions:
+  - {fileID: 1741319942}
+  - {fileID: 2023375806}
+  - {fileID: 648227595}
+  - {fileID: 1386172170}
+  - {fileID: 556237074}
+  - {fileID: 880478009}
+  - {fileID: 1657362362}
+  - {fileID: 1610774830}
+  - {fileID: 71442816}
+  - {fileID: 1336096993}
   timeBetweenWaves: 6
   waveAnnouncementText:
   - {fileID: 1379681389}
@@ -9106,6 +9116,8 @@ MonoBehaviour:
   waveStarted: 0
   upgradeChosen: 0
   finishedSpawning: 1
+  bossSpawned: 0
+  gameOver: 0
   lvlUpScreen: {fileID: 1138232998}
   lvlUpPrefab: {fileID: 8248342096010032526, guid: b153b9b7802adeb4cbd7860a409333cf, type: 3}
   relicPrefabs:
@@ -9289,7 +9301,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880478008}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -12109,7 +12121,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336096992}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -12497,7 +12509,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386172169}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -13274,7 +13286,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610774829}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -13471,7 +13483,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657362361}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

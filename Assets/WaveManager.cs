@@ -327,9 +327,9 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log($"--- Starting Wave {waveNumber} ---");
 
-        WaveInfo waveInfo = waves[waveNumber - 1];
+        
 
-        if (waveInfo == null)
+        if (waveNumber - 1 >= waves.Length)
         {
             // Spawn boss
             BossAttacks boss = Instantiate(bossPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
@@ -344,8 +344,8 @@ public class WaveManager : MonoBehaviour
             yield break;
         }
 
-        
-        
+
+        WaveInfo waveInfo = waves[waveNumber - 1];
 
         WaveEvent[] events = waveInfo.waveEvents;
 
@@ -364,24 +364,28 @@ public class WaveManager : MonoBehaviour
                     enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
                     enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
                     enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    activeEnemies.Add(enemyTemp);
                     break;
                 case Entity.FlyingEnemy:
                     enemyTemp = Instantiate(waveInfo.FlyingEnemyPrefab, Vector3.zero, Quaternion.identity);
                     enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
                     enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
                     enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    activeEnemies.Add(enemyTemp);
                     break;
                 case Entity.DashingEnemy:
                     enemyTemp = Instantiate(waveInfo.DashingEnemyPrefab, Vector3.zero, Quaternion.identity);
                     enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
                     enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
                     enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    activeEnemies.Add(enemyTemp);
                     break;
                 case Entity.DroppedEnemy:
                     enemyTemp = Instantiate(waveInfo.DroppedEnemyPrefab, Vector3.zero, Quaternion.identity);
                     enemyTemp.health *= (waveEvent.healthBoost + waveInfo.generalEnemyHealthBoost - 1);
                     enemyTemp.speed *= (waveEvent.speedBoost + waveInfo.generalEnemySpeedBoost - 1);
                     enemyTemp.transform.position = spawnPositions[waveEvent.spawnPosition].position;
+                    activeEnemies.Add(enemyTemp);
                     break;
                 case Entity.FlyingBox:
                     conveyorBelt.SpawnFlyingBox(waveInfo.FlyingBoxPrefab);

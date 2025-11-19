@@ -44,10 +44,20 @@ public class BossAttacks : MonoBehaviour
     [SerializeField] private Transform leftSpikePivot;
     [SerializeField] private Transform leftSpikeElbow;
     [SerializeField] private GameObject leftSpike;
+    [SerializeField] private Transform leftSpikeAttackPoint;
 
     [SerializeField] private Transform rightSpikePivot;
     [SerializeField] private Transform rightSpikeElbow;
     [SerializeField] private GameObject rightSpike;
+    [SerializeField] private Transform rightSpikeAttackPoint;
+
+    [SerializeField] private float spikeAttackInterval = 0.75f;
+    private bool leftAttacked = false;
+    private bool leftArmMoving = true;
+    private bool rightArmMoving = true;
+    [SerializeField] private EnemyProjectile spikeShotPrefab;
+    [SerializeField] private float spikeShotSpeed = 20f;
+    private float justShotSpike;
 
     private float leftSpikeTargetZ;
     private float rightSpikeTargetZ;
@@ -85,6 +95,8 @@ public class BossAttacks : MonoBehaviour
 
     private float sweepStartX;
     private bool sweepingRight = true;
+
+    private Collider2D[] cols;
 
     public IEnumerator BossReviveSequence(Transform bossRoot)
     {
@@ -191,6 +203,12 @@ public class BossAttacks : MonoBehaviour
             finalSeq.Join(sr.DOColor(originalColors[sr], 0.3f).SetEase(Ease.OutSine));
         yield return finalSeq.WaitForCompletion();
 
+
+        foreach (Collider2D col in cols)
+            col.enabled = true;
+
+        justShotSpike = Time.time;
+
         readyToAttack = true;
     }
 
@@ -211,14 +229,86 @@ public class BossAttacks : MonoBehaviour
         if (faceRoot != null)
             sweepStartX = faceRoot.localPosition.x;
 
+
+        cols = GetComponentsInChildren<Collider2D>();
+
+        foreach (Collider2D col in cols)
+            col.enabled = false;
+
         StartCoroutine(BossReviveSequence(this.transform));
     }
 
     private void Update()
     {
 
-        if(!readyToAttack)
+        if (!readyToAttack)
             return;
+
+        if (Time.time > justShotSpike + spikeAttackInterval)
+        {
+            // Left Spike Attack
+            if (leftSpike != null && !leftAttacked)
+            {
+                leftArmMoving = false;
+                DOVirtual.DelayedCall(0.15f, () =>
+                {
+                    leftAttacked = true;
+                    Quaternion rot = leftSpikeAttackPoint.rotation;
+                    EnemyProjectile spikeShotTemp = Instantiate(spikeShotPrefab, leftSpikeAttackPoint.position, rot);
+                    Rigidbody2D rb = spikeShotTemp.GetComponent<Rigidbody2D>();
+                    if (rb) rb.linearVelocity = rot * Vector2.down * spikeShotSpeed;
+
+
+
+                    float recoilTargetY = leftSpikeElbow.localPosition.y - 0.5f;
+                    leftSpikeElbow.DOLocalMoveY(recoilTargetY, 0.2f) // Shorter duration for the initial retract
+                        .SetLoops(2, LoopType.Yoyo) // Retract (1) then return (2)
+                        .SetEase(Ease.OutSine) // Makes the movement feel snappy
+                        .OnComplete(() =>
+                        {
+                            DOVirtual.DelayedCall(0.15f, () =>
+                            {
+                                leftArmMoving = true;
+                            });
+                            
+                        });
+                });
+
+
+            }
+            // Right Spike Attack
+            else if (rightSpike != null && leftAttacked)
+            {
+                rightArmMoving = false;
+
+                DOVirtual.DelayedCall(0.15f, () =>
+                {
+                    leftAttacked = false;
+                    Quaternion rot = rightSpikeAttackPoint.rotation;
+                    EnemyProjectile spikeShotTemp = Instantiate(spikeShotPrefab, rightSpikeAttackPoint.position, rot);
+                    Rigidbody2D rb = spikeShotTemp.GetComponent<Rigidbody2D>();
+                    if (rb) rb.linearVelocity = rot * Vector2.down * spikeShotSpeed;
+
+
+
+                    float recoilTargetY = rightSpikeElbow.localPosition.y - 0.5f;
+                    rightSpikeElbow.DOLocalMoveY(recoilTargetY, 0.2f)
+                        .SetLoops(2, LoopType.Yoyo)
+                        .SetEase(Ease.OutSine)
+                        .OnComplete(() =>
+                        {
+                            DOVirtual.DelayedCall(0.15f, () =>
+                            {
+                                rightArmMoving = true;
+                            });
+                            
+                        });
+                });
+
+            }
+
+            justShotSpike = Time.time;
+        }
 
         // switch to mouth phase once all arms are destroyed
         if (bossHealth != null && bossHealth.AreAllArmsDestroyed())
@@ -236,9 +326,9 @@ public class BossAttacks : MonoBehaviour
             HandlePivotMovement(rightClawPivot, ref rightTimer, ref rightTargetZ, false);
 
         // --- Pivot idle rotation (Spikes) ---
-        if (leftSpikePivot != null)
+        if (leftSpikePivot != null && leftArmMoving)
             HandlePivotMovement(leftSpikePivot, ref leftSpikeTimer, ref leftSpikeTargetZ, true);
-        if (rightSpikePivot != null)
+        if (rightSpikePivot != null && rightArmMoving)
             HandlePivotMovement(rightSpikePivot, ref rightSpikeTimer, ref rightSpikeTargetZ, false);
 
         // --- Periodic arm attack ---

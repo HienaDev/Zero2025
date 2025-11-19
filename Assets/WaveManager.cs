@@ -175,7 +175,7 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnUpgrades()
     {
-        lvlUpScreen.gameObject.SetActive(true);    
+        lvlUpScreen.parent.gameObject.SetActive(true);    
         // If odd wave → relics; even → powerups
         if (currentWave % 2 == 1)
         {
@@ -242,7 +242,7 @@ public class WaveManager : MonoBehaviour
             // Spawn up to N upgrades
             while (spawned < numberOfUpgradesToSpawn)
             {
-                Vector3 spawnPos = new Vector3((spawned - numberOfUpgradesToSpawn / 2) * upgradeOffset, 80f, 0f);
+                Vector3 spawnPos = new Vector3((spawned - numberOfUpgradesToSpawn / 2) * upgradeOffset, 40f, 0f);
 
                 // 50% chance to show a level-up if any are available
                 bool canLvlUp = effectsToLevelUp.Count > 0 && UnityEngine.Random.value < 0.5f;
@@ -307,7 +307,7 @@ public class WaveManager : MonoBehaviour
             int slotIndex = i + filledSlots;
             Vector3 spawnPos = new Vector3(
                 (slotIndex - numberOfUpgradesToSpawn / 2) * upgradeOffset,
-                80f,
+                40f,
                 0f
             );
 
@@ -327,7 +327,7 @@ public class WaveManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        lvlUpScreen.gameObject.SetActive(false);
+        lvlUpScreen.parent.gameObject.SetActive(false);
         upgradeChosen = true;
     }
 

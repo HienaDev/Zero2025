@@ -119,7 +119,8 @@ public class Enemy : MonoBehaviour
 
 
 
-            sequence.AppendInterval(0.1f);
+            sequence.AppendCallback(() => speed = originalSpeed * 0.85f); 
+            sequence.AppendInterval(0.04f);
             sequence.AppendCallback(() => speed = originalSpeed);
         }
     }

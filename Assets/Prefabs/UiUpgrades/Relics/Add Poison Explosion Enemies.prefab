@@ -289,7 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectToAdd: {fileID: 8963920898526727781, guid: 938f23a4d46c9dc41b536ec14d938af2, type: 3}
-  dependsOnThisEffect: []
+  dependsOnThisEffect:
+  - {fileID: 2575609776876419473, guid: 6a93532a4be174e44b8b7f316379cd7d, type: 3}
   removeDependentsOnAdd: 0
   sounds:
   - {fileID: 8300000, guid: b0179a1558fe8d044a37a8668cfd74b8, type: 3}

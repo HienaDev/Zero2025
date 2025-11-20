@@ -66,8 +66,8 @@ public class WaveManager : MonoBehaviour
     {
         conveyorBelt = FindAnyObjectByType<ConveyorBelt>();
         playerStats = FindAnyObjectByType<PlayerStats>();
-        upgradeChosen = false;
-        SpawnUpgrades();
+        upgradeChosen = true;
+        
 
         StartCoroutine(WaveLoop());
     }

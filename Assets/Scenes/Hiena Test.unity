@@ -9184,6 +9184,8 @@ MonoBehaviour:
   bossPrefab: {fileID: 8395652017234829119, guid: beba426aea8f84748b38a238a8443657, type: 3}
   waves:
   - {fileID: 11400000, guid: a1fc522d0481f82409a7088f8e888da1, type: 2}
+  - {fileID: 11400000, guid: cdcfb23db3ad77d459f06dff37d8969c, type: 2}
+  - {fileID: 11400000, guid: 2d719b7209c600c44b4c0f5f5a2aa611, type: 2}
   - {fileID: 11400000, guid: 0ca23363d14570442a6d953476de7279, type: 2}
   UItoDisappear: {fileID: 1048956774}
   spawnPositions:

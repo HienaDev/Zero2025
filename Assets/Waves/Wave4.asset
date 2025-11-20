@@ -28,7 +28,7 @@ MonoBehaviour:
     healthBoost: 1
     spawnPosition: 2
     conveyorSpeed: 1
-  - delay: 2
+  - delay: 5
     entityType: 0
     speedBoost: 1
     healthBoost: 1

@@ -164,8 +164,8 @@ public class WaveManager : MonoBehaviour
     private void SpawnUpgrades()
     {
         lvlUpScreen.parent.gameObject.SetActive(true);
-        // If odd wave → relics; even → powerups
-        if (currentWave % 2 == 1)
+
+        if (currentWave % 2 == 0)
         {
             relicPrefabs.Shuffle();
 

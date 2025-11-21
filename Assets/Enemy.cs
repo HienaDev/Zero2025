@@ -85,7 +85,6 @@ public class Enemy : MonoBehaviour
             sequence?.Kill();
             KillEnemy();
         }
-        else
         {
             if (hitSounds.Length > 0)
                 AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 2f, pitch: Random.Range(0.9f, 1.1f));

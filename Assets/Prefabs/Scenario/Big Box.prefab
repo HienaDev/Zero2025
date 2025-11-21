@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2378768853363218437}
   - component: {fileID: 1791171003288997389}
   - component: {fileID: 3355954727513841836}
+  - component: {fileID: 3021474538134344959}
   m_Layer: 7
   m_Name: Floor Box
   m_TagString: Untagged
@@ -165,6 +166,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08836e1a8e22bd548bef88379bdbb866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3021474538134344959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403385917714647461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d322d35e143a89a46a1b09d858ffdc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6978330309302432213

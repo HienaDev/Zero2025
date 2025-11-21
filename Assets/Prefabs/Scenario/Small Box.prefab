@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5005769090485648156}
   - component: {fileID: 3880481804614257759}
   - component: {fileID: 4942726619096930872}
+  - component: {fileID: 9178788286632074738}
   m_Layer: 7
   m_Name: Floor Box (1)
   m_TagString: Untagged
@@ -167,6 +168,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08836e1a8e22bd548bef88379bdbb866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9178788286632074738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950357435242951402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d322d35e143a89a46a1b09d858ffdc03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2403385917714647461
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +193,7 @@ GameObject:
   - component: {fileID: 2378768853363218437}
   - component: {fileID: 1791171003288997389}
   - component: {fileID: 3355954727513841836}
+  - component: {fileID: 9203541186646439337}
   m_Layer: 7
   m_Name: Floor Box
   m_TagString: Untagged
@@ -332,6 +346,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08836e1a8e22bd548bef88379bdbb866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9203541186646439337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403385917714647461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d322d35e143a89a46a1b09d858ffdc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6978330309302432213

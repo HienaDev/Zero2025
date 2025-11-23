@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.G))
+        {
+            SetGrounded(true);
+        }
+
         // 🔹 If movement is disabled but following a target, smoothly follow it
         if (!canMove && followTarget != null)
         {

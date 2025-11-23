@@ -42,13 +42,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int vibrato = 10;
     [SerializeField] private float elasticity = 10f;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         originalScale = transform.localScale;
 
         originalSpeed = speed;
-        if(spriteRenderers == null || spriteRenderers.Length == 0)
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
             spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         spriteRenderers = spriteRenderers
@@ -59,7 +63,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        animator.enabled = !currentStatusEffects.Contains(Status.Frozen);
     }
 
 
@@ -90,13 +95,7 @@ public class Enemy : MonoBehaviour
                 AudioManager.Instance.Play(hitSounds[Random.Range(0, hitSounds.Length)], loop: false, volume: 2f, pitch: Random.Range(0.9f, 1.1f));
 
 
-            if (currentStatusEffects.Contains(Status.Frozen))
-            {
-                speed = 0f;
-                // If frozen, take extra damage or some special effect
-                // For simplicity, we just return here
-                return;
-            }
+
             // Optional: Add feedback for taking damage (e.g., flash red) using do tween
             sequence?.Kill();
 
@@ -117,8 +116,15 @@ public class Enemy : MonoBehaviour
             }
 
 
+            if (currentStatusEffects.Contains(Status.Frozen))
+            {
+                speed = 0f;
+                // If frozen, take extra damage or some special effect
+                // For simplicity, we just return here
+                return;
+            }
 
-            sequence.AppendCallback(() => speed = originalSpeed * 0.85f); 
+            sequence.AppendCallback(() => speed = originalSpeed * 0.85f);
             sequence.AppendInterval(0.04f);
             sequence.AppendCallback(() => speed = originalSpeed);
         }
@@ -156,7 +162,7 @@ public class Enemy : MonoBehaviour
 
         SpriteRenderer burn = gameObject.GetComponentInChildren<Tag_Burn>().GetComponent<SpriteRenderer>();
 
-        Debug.Log("Burn Sprite: " + burn);  
+        Debug.Log("Burn Sprite: " + burn);
 
         currentStatusEffects.Add(Status.Burn);
 
@@ -189,12 +195,12 @@ public class Enemy : MonoBehaviour
         // Example: Reduce speed to 0
         // Assuming there's a movement component to modify
 
+       
 
-        yield return new WaitForEndOfFrame(); // Wait a frame to ensure we dont shoot icycles in the same frame we freeze an enemy
 
         iceTween?.Kill();
 
-        
+
 
         SpriteRenderer ice = gameObject.GetComponentInChildren<TAG_Ice>().GetComponent<SpriteRenderer>();
 
@@ -214,6 +220,7 @@ public class Enemy : MonoBehaviour
             ice.color = Color.clear;
             currentStatusEffects.Remove(Status.Frozen);
         });
+        yield return new WaitForEndOfFrame(); // Wait a frame to ensure we dont shoot icycles in the same frame we freeze an enemy
     }
 
     private System.Collections.IEnumerator ApplyPoisonEffect(float duration)
@@ -249,11 +256,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void KillEnemy(float delay = -1f , bool execute = false)
+    public void KillEnemy(float delay = -1f, bool execute = false)
     {
 
-        if(execute && !executable)
-            { return; }
+        if (execute && !executable)
+        { return; }
 
 
         Animator animator = gameObject.GetComponent<Animator>();
@@ -274,13 +281,13 @@ public class Enemy : MonoBehaviour
         speed = 0f;
         originalSpeed = 0f;
         Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
-        
+
         foreach (var collider in colliders)
         {
             collider.enabled = false;
         }
 
-        DOVirtual.DelayedCall(destroyDelay * 2/3, () =>
+        DOVirtual.DelayedCall(destroyDelay * 2 / 3, () =>
         {
             Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
 

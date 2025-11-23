@@ -451,7 +451,7 @@ MonoBehaviour:
   originalSpeed: 0
   currentStatusEffects: 
   deathEffectPrefab: {fileID: 5787542957485260482, guid: 4d0d3327cf843624e85f4877af41b10a, type: 3}
-  destroyDelay: 0
+  destroyDelay: 0.7
   hitSounds:
   - {fileID: 8300000, guid: 6790c6f2caab44744a8bdf3f8ca69847, type: 3}
   deathSounds:

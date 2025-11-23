@@ -23,10 +23,10 @@ MonoBehaviour:
   generalEnemyHealthBoost: 1.4
   waveEvents:
   - delay: 0
-    entityType: 0
+    entityType: 2
     speedBoost: 1
     healthBoost: 1
-    spawnPosition: 1
+    spawnPosition: 0
     conveyorSpeed: 0
   - delay: 5
     entityType: 0

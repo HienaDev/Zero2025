@@ -28,7 +28,7 @@ MonoBehaviour:
     healthBoost: 1
     spawnPosition: 2
     conveyorSpeed: -5
-  - delay: 2
+  - delay: 10
     entityType: 0
     speedBoost: 1
     healthBoost: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
     healthBoost: 1
     spawnPosition: 5
     conveyorSpeed: 0
-  - delay: 5
+  - delay: 10
     entityType: 7
     speedBoost: 1
     healthBoost: 1
@@ -142,13 +142,13 @@ MonoBehaviour:
     healthBoost: 1
     spawnPosition: 12
     conveyorSpeed: 0
-  - delay: 6
+  - delay: 7
     entityType: 5
     speedBoost: 1
     healthBoost: 1
     spawnPosition: 5
     conveyorSpeed: 0
-  - delay: 5
+  - delay: 10
     entityType: 7
     speedBoost: 1
     healthBoost: 1

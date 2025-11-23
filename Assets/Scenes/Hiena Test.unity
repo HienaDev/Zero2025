@@ -9189,6 +9189,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ca23363d14570442a6d953476de7279, type: 2}
   - {fileID: 11400000, guid: c3cdaae6c3587e5408df704c97d8c103, type: 2}
   - {fileID: 11400000, guid: bfe83f2f1ee3e4443bbdabd480872e88, type: 2}
+  - {fileID: 11400000, guid: 6f0d9798f51b99f4fa1b9e99444b331e, type: 2}
+  - {fileID: 11400000, guid: 9ccd8db9ed12e204a948dd8ce863b467, type: 2}
+  - {fileID: 11400000, guid: ab8ad41c50cd593459af8c2d281faffe, type: 2}
   UItoDisappear: {fileID: 1048956774}
   spawnPositions:
   - {fileID: 12968919}

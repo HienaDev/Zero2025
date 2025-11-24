@@ -335,6 +335,8 @@ public class WaveManager : MonoBehaviour
             BossAttacks boss = Instantiate(bossPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
             //boss.Initialize(playerStats);
 
+            conveyorBelt.KillAllBoxes();
+
             foreach (Enemy enemy in boss.GetComponentsInChildren<Enemy>())
             {
                 activeEnemies.Add(enemy);

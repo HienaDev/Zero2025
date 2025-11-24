@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
 
         if (damageColor == default)
         {
-            damageColor = Color.white;
+            damageColor = Color.red;
         }
 
         health -= damage;
@@ -107,12 +107,14 @@ public class Enemy : MonoBehaviour
             sequence.AppendCallback(() => speed = 0f);
             foreach (var sr in spriteRenderers)
             {
-                sequence.Join(sr.DOColor(damageColor, 0.05f).SetEase(Ease.OutQuart));
+                sequence.Join(sr.DOColor(damageColor, 0.02f).SetEase(Ease.OutQuart));
             }
+
+            sequence.AppendInterval(0.12f);
 
             foreach (var sr in spriteRenderers)
             {
-                sequence.Join(sr.DOColor(Color.white, 0.05f).SetEase(Ease.InQuart));
+                sequence.Join(sr.DOColor(Color.white, 0.02f).SetEase(Ease.InQuart));
             }
 
 
@@ -124,8 +126,6 @@ public class Enemy : MonoBehaviour
                 return;
             }
 
-            sequence.AppendCallback(() => speed = originalSpeed * 0.85f);
-            sequence.AppendInterval(0.04f);
             sequence.AppendCallback(() => speed = originalSpeed);
         }
     }

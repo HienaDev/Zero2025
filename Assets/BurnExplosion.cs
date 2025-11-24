@@ -17,7 +17,7 @@ public class BurnExplosion : ProjectileEffect
             return;
 
         ExplosionProjectile poisonBomb = Instantiate(bombPrefab, Enemy.transform.position, Quaternion.identity);
-        poisonBomb.Initialize(25f);
+        poisonBomb.Initialize(75f);
     }
 
     public override void LevelUp()

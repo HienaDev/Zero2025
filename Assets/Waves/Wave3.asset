@@ -19,8 +19,8 @@ MonoBehaviour:
   FlyingBoxPrefab: {fileID: 6978330309302432213, guid: a2966c9d7cb475746938cd9fbf81474e, type: 3}
   GroundBoxBigPrefab: {fileID: 6978330309302432213, guid: 3f47dc0790bcd204d8efcf532369ffc1, type: 3}
   GroundBoxSmallPrefab: {fileID: 6978330309302432213, guid: afdf5c8c7b0e143469177688a072cd84, type: 3}
-  generalEnemySpeedBoost: 1
-  generalEnemyHealthBoost: 1.4
+  generalEnemySpeedBoost: 1.5
+  generalEnemyHealthBoost: 2
   waveEvents:
   - delay: 0
     entityType: 0

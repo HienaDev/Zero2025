@@ -6,6 +6,8 @@ public class ExplosionProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float damage;
 
+    [SerializeField] private float radiusMultiplier = 1f;
+
     [SerializeField] private bool burn = false;
 
     [SerializeField] private AudioClip[] sounds;
@@ -15,7 +17,7 @@ public class ExplosionProjectile : MonoBehaviour
         // Random rotation
         transform.Rotate(0f, 0f, Random.Range(0f, 360f));
 
-        Initialize(3f);
+        //Initialize(3f);
     }
 
     public void Initialize(float damage)
@@ -68,5 +70,11 @@ public class ExplosionProjectile : MonoBehaviour
 
         
 
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, transform.localScale.x * radiusMultiplier);
     }
 }

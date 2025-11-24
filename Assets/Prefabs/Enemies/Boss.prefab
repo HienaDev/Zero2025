@@ -2184,15 +2184,15 @@ MonoBehaviour:
   spikeShotSpeed: 12.5
   mouthPoint: {fileID: 284573102120820926}
   projectilePrefab: {fileID: 851641196105649645, guid: 9ee989aeee0900d428864f72f3289933, type: 3}
-  projectileSpeed: 3
-  fireInterval: 2
-  projectileCountPerWave: 6
-  spreadAngle: 120
-  projectileCountVariation: 3
+  projectileSpeed: 5
+  fireInterval: 1.5
+  projectileCountPerWave: 8
+  spreadAngle: 105
+  projectileCountVariation: 2
   faceRoot: {fileID: 6750102725179196799}
   enableSweepAttack: 1
-  sweepDistance: 7
-  sweepSpeed: 3
+  sweepDistance: 5
+  sweepSpeed: 6
 --- !u!1 &3148448439667582407
 GameObject:
   m_ObjectHideFlags: 0

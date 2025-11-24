@@ -36,6 +36,23 @@ public class ConveyorBelt : MonoBehaviour
 
     private WaveManager waveManager;
 
+    public void KillAllBoxes()
+    {
+        foreach(GameObject box in spawnedFlyingBoxes)
+        {
+            Destroy(box);
+        }
+
+        spawnedFlyingBoxes.Clear();
+
+        foreach(GameObject box in spawnedBoxes)
+        {
+            Destroy(box);
+        }
+
+        spawnedBoxes.Clear();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -11,12 +11,12 @@ public class Explosion : ProjectileEffect
 
     public override void CallEffect(Enemy Enemy)
     {
-        bool shouldApplyEffect = Random.value <= effectChance;
+        bool shouldApplyEffect = Random.value <= effectChance;  
         if (!shouldApplyEffect)
             return;
 
         ExplosionProjectile poisonBomb = Instantiate(bombPrefab, Enemy.transform.position, Quaternion.identity);
-        poisonBomb.Initialize(25f); 
+        poisonBomb.Initialize(75f); 
     }
 
     public override void LevelUp()

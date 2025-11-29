@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5655415666358572808}
   - component: {fileID: 7195461609524989021}
   m_Layer: 5
-  m_Name: Damage Modifier (5)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 29}
+  m_AnchoredPosition: {x: 1.0999985, y: 27.3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5655415666358572808
@@ -143,9 +143,7 @@ MonoBehaviour:
   m_text: '<u><b>Beam Ghost:</b></u>
 
     <size=75%>greatly increases shoot rate
-    but damage is decreased
-
-'
+    but reduces damage'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
   m_sharedMaterial: {fileID: 743051343549308371, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
@@ -210,7 +208,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 36.523632, y: 215.5118, z: 39.727432, w: 27.614166}
+  m_margin: {x: 36.523632, y: 215.5118, z: 40.506958, w: 27.614166}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

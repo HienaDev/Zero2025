@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 51554820671660059}
   - component: {fileID: 6980121121098179401}
   m_Layer: 5
-  m_Name: Damage Modifier (7)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -6.1, y: 31.700005}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &51554820671660059
@@ -65,8 +65,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u><b>Fire Bomb:</b></u>\r\n<size=75%>explosions now have a chance to
-    inflict burn \r\n"
+  m_text: '<u><b>Fire Bomb:</b></u>
+
+    <size=75%>explosions have a chance to inflict
+    burn
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
   m_sharedMaterial: {fileID: 743051343549308371, guid: 85576f3a6fe11c34c98e0b2a0df139a0, type: 2}
@@ -93,10 +97,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.75
-  m_fontSizeBase: 24
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 24
   m_fontStyle: 0
@@ -131,7 +135,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 36.523632, y: 215.5118, z: 39.727432, w: 27.614166}
+  m_margin: {x: 36.523632, y: 215.5118, z: 26.183311, w: 27.614166}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -239,10 +243,10 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6722894635865122046}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8058692, y: 1.8058692, z: 1.8058692}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3870879769167145995}
   - {fileID: 7495095137310266227}
@@ -250,8 +254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 300}
+  m_AnchoredPosition: {x: 0, y: 80}
+  m_SizeDelta: {x: 135.2, y: 204.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3726868688511243406
 CanvasRenderer:

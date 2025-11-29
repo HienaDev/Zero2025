@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7867476704801960379}
   - component: {fileID: 7989398650424331765}
   m_Layer: 5
-  m_Name: Damage Modifier (9)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: -2.850006, y: 31.7}
+  m_SizeDelta: {x: 0.099993944, y: -0.000030517578}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7867476704801960379
 CanvasRenderer:
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_text: '<u><b>LaserY Ghost:</b></u>
 
     <size=75%>shots have a chance to create
-    an vertical beam
+    a vertical beam
 
 '
   m_isRightToLeft: 0
@@ -172,10 +172,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.6
-  m_fontSizeBase: 24
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 24
   m_fontStyle: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 36.523632, y: 215.5118, z: 39.727432, w: 27.614166}
+  m_margin: {x: 36.523632, y: 215.5118, z: 32.5748, w: 27.614166}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -243,10 +243,10 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7778034523122194409}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8058692, y: 1.8058692, z: 1.8058692}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6369588245974220218}
   - {fileID: 3824487617713237644}
@@ -254,8 +254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 300}
+  m_AnchoredPosition: {x: 0, y: 80}
+  m_SizeDelta: {x: 135.2, y: 204.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3603621574580795404
 CanvasRenderer:
